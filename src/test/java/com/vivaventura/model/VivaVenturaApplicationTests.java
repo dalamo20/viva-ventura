@@ -1,4 +1,4 @@
-package com.example.vivaventura;
+package com.vivaventura.model;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
