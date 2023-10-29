@@ -44,7 +44,7 @@ public class User {
     //email validation method
     public boolean validateEmail(String email){
         // Regular expression pattern for basic emails
-        String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);
         // Checks if the email matches the emailPattern
