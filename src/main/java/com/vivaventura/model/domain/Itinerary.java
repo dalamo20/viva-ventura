@@ -9,9 +9,7 @@ public class Itinerary {
     private List<Activity> activities;
 
     //Default constructor
-    public Itinerary(){
-        System.out.println("Itinerary created");
-    }
+    public Itinerary(){}
 
     //Overloaded constructor
     public Itinerary(String name, List<Activity> activities) {
