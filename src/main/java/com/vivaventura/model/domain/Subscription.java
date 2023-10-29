@@ -1,8 +1,20 @@
 package com.vivaventura.model.domain;
 
+import java.util.Objects;
+
 public class Subscription {
+    //Instance variables
     private boolean isSubscribed;
     private boolean paymentConfirmed;
+
+    //Default constructor
+    public Subscription(){}
+
+    //Overloaded constructor
+    public Subscription(boolean isSubscribed, boolean paymentConfirmed) {
+        this.isSubscribed = isSubscribed;
+        this.paymentConfirmed = paymentConfirmed;
+    }
 
     public boolean isSubscribed() {
         return isSubscribed;
@@ -18,5 +30,27 @@ public class Subscription {
 
     public void setPaymentConfirmed(boolean paymentConfirmed) {
         this.paymentConfirmed = paymentConfirmed;
+    }
+
+    //Custom toString method
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "paymentConfirmed=" + paymentConfirmed +
+                '}';
+    }
+
+    //Equals method
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Subscription that)) return false;
+        return isSubscribed() == that.isSubscribed() && isPaymentConfirmed() == that.isPaymentConfirmed();
+    }
+
+    //Hashcode
+    @Override
+    public int hashCode() {
+        return Objects.hash(isSubscribed(), isPaymentConfirmed());
     }
 }
