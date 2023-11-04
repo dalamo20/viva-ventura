@@ -1,11 +1,13 @@
 package com.vivaventura.model.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class User {
+public class User implements Serializable {
     //Instance variables
+    private static final long serialVersionUID = 7661657477853633935L;
     private String password;
     private String email;
     private Profile profile;

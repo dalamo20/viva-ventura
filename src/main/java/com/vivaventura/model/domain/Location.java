@@ -1,10 +1,12 @@
 package com.vivaventura.model.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Location {
+public class Location implements Serializable {
     //Instance variables
+    private static final long serialVersionUID = 1L;
     private String name;
     private String address;
     private double latitude;

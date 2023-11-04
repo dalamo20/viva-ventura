@@ -1,29 +1,31 @@
 package com.vivaventura.model.domain;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Activity {
+public class Activity implements Serializable {
     //Instance variables
+    private static final long serialVersionUID = 1L;
     private String name;
-    private Date date;
-    private Time time;
+    private String date;
+    private String time;
     private Location location;
 
     //Default constructor
     public Activity(){}
 
     //Overloaded constructor
-    public Activity(String name, Date date, Time time, Location location) {
+    public Activity(String name, String date, String time, Location location) {
         this.name = name;
         this.date = date;
         this.time = time;
         this.location = location;
     }
 
-    public Activity(String name, String location, Time time) {
+    public Activity(String name, String location, String time) {
         // Perform null checks during object creation
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
@@ -47,19 +49,19 @@ public class Activity {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -82,15 +84,13 @@ public class Activity {
                 '}';
     }
 
-    //Equals method
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Activity activity)) return false;
-        return getName().equals(activity.getName()) && getDate().equals(activity.getDate()) && Objects.equals(getTime(), activity.getTime()) && Objects.equals(getLocation(), activity.getLocation());
+        return Objects.equals(getName(), activity.getName()) && Objects.equals(getDate(), activity.getDate()) && Objects.equals(getTime(), activity.getTime()) && Objects.equals(getLocation(), activity.getLocation());
     }
 
-    //Hashcode: Location & Time are non-null fields
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getDate(), getTime(), getLocation());

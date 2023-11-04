@@ -1,30 +1,30 @@
 package com.vivaventura.model.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Profile {
+public class Profile implements Serializable {
     //Instance variables
+    private static final long serialVersionUID = 1L;
     private String name;
     private String phoneNumber;
     private String location;
     private boolean twoFactorAuthenticationEnabled;
-    private UUID id;
 
     //Default constructor
     public Profile(){}
 
     //Overloaded constructor
-    public Profile(String name, String phoneNumber, String location, boolean twoFactorAuthenticationEnabled, UUID id) {
+    public Profile(String name, String phoneNumber, String location, boolean twoFactorAuthenticationEnabled) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.twoFactorAuthenticationEnabled = twoFactorAuthenticationEnabled;
-        this.id = id;
     }
 
     //validate fields are not null
-    public Profile(String name, String location, UUID id) {
+    public Profile(String name, String location) {
         // Perform null checks during object creation
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
@@ -32,20 +32,9 @@ public class Profile {
         if (location == null) {
             throw new IllegalArgumentException("Location cannot be null");
         }
-        if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
-        }
+
         this.name = name;
         this.location = location;
-        this.id = id;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -85,7 +74,6 @@ public class Profile {
     public String toString() {
         return "Profile{" +
                 "name='" + name + '\'' +
-                ", user id=" + id +
                 '}';
     }
 
@@ -94,12 +82,12 @@ public class Profile {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Profile profile)) return false;
-        return isTwoFactorAuthenticationEnabled() == profile.isTwoFactorAuthenticationEnabled() && getName().equals(profile.getName()) && Objects.equals(getPhoneNumber(), profile.getPhoneNumber()) && getLocation().equals(profile.getLocation()) && getId().equals(profile.getId());
+        return isTwoFactorAuthenticationEnabled() == profile.isTwoFactorAuthenticationEnabled() && getName().equals(profile.getName()) && Objects.equals(getPhoneNumber(), profile.getPhoneNumber()) && getLocation().equals(profile.getLocation());
     }
 
-    //Hashcode: name, location and id are non null fields
+    //Hashcode: name, location are non null fields
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getPhoneNumber(), getLocation(), isTwoFactorAuthenticationEnabled(), getId());
+        return Objects.hash(getName(), getPhoneNumber(), getLocation(), isTwoFactorAuthenticationEnabled());
     }
 }

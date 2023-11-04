@@ -1,28 +1,30 @@
 package com.vivaventura.model.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Itinerary {
+public class Itinerary implements Serializable {
     //Instance variables
-    private String name;
+    private static final long serialVersionUID = 1L;
+    private String itineraryItemName;
     private List<Activity> activities;
 
     //Default constructor
     public Itinerary(){}
 
     //Overloaded constructor
-    public Itinerary(String name, List<Activity> activities) {
-        this.name = name;
+    public Itinerary(String itineraryItemName, List<Activity> activities) {
+        this.itineraryItemName = itineraryItemName;
         this.activities = activities;
     }
 
-    public String getName() {
-        return name;
+    public String getItineraryItemName() {
+        return itineraryItemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItineraryItemName(String itineraryItemName) {
+        this.itineraryItemName = itineraryItemName;
     }
 
     public List<Activity> getActivities() {
@@ -46,12 +48,12 @@ public class Itinerary {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Itinerary itinerary)) return false;
-        return Objects.equals(getName(), itinerary.getName()) && Objects.equals(getActivities(), itinerary.getActivities());
+        return Objects.equals(getItineraryItemName(), itinerary.getItineraryItemName()) && Objects.equals(getActivities(), itinerary.getActivities());
     }
 
     //Hashcode
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getActivities());
+        return Objects.hash(getItineraryItemName(), getActivities());
     }
 }

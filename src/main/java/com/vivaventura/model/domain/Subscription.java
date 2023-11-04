@@ -1,9 +1,11 @@
 package com.vivaventura.model.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Subscription {
+public class Subscription implements Serializable {
     //Instance variables
+    private static final long serialVersionUID = 1L;
     private boolean isSubscribed;
     private boolean paymentConfirmed;
 
