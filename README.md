@@ -1,7 +1,42 @@
-# viva-ventura
-Object oriented software contstruction. A travel itinerary
+# Viva Ventura
 
-Viva Ventura is an itinerary app that's much like a to-do list but with travel. This app will allow users to create detailed itineraries of their trips. 
-These details include times and dates of planned reservations, flights, and other activities. 
-This app is perfect for those who like to see an organized travel plan or for the adventurous digital nomad whom has to keep up a travel blog. 
+## Introduction
 
+Viva Ventura is more than just an itinerary app, it's your ultimate travel companion. Whether you're planning a relaxing getaway or embarking on an adventurous journey, Viva Ventura empowers you to create and manage detailed itineraries for your trips. Say goodbye to the hassle of disorganized travel plans and hello to a more enjoyable travel experience.
+
+## Key Features
+
+- **Detailed Itinerary**: Create and manage detailed itineraries, including reservations, flights, activities, and more.
+
+- **Organization**: Keep your travel plans organized with times and dates for all your activities.
+
+- **Perfect for Digital Nomads**: Ideal for digital nomads and travel bloggers who want to document their adventures.
+
+- **Customization**: Tailor your itineraries to your unique travel style.
+
+## Why Viva Ventura?
+
+- Tired of disorganized travel plans? Viva Ventura helps you stay on top of your travel itinerary, making every trip unforgettable.
+
+- Whether you're a solo traveler, a couple, or a family, Viva Ventura is designed for everyone.
+
+## JUnit Tests for Domains
+<img width="1061" alt="userTest" src="https://github.com/dalamo20/viva-ventura/assets/35320043/dbe0636d-a575-4726-a805-34fd4cadb1a3">
+
+- validateValidEmail tests a variation of emails that are valid.
+- validateInvalidEmail tests a variation of emails that are invalid.
+- validateValidPassword tests possible passwords that are valid.
+- validateInvalidPassword tests possible passwords that are invalid.
+
+## JUnit Tests for Services
+<img width="1016" alt="loginService" src="https://github.com/dalamo20/viva-ventura/assets/35320043/abfdf1ce-7df3-4491-abee-e157f05043be">
+- authenticateUser checks whether the user is authenticated
+
+<img width="994" alt="userService" src="https://github.com/dalamo20/viva-ventura/assets/35320043/eba1db9b-f4a3-4d4c-823f-7b71d1ee3e03">
+
+- createUser creates a user and stores them in an arraylist
+- getUserByUsername finds a user by username
+- updateUser updates the user information
+- deleteUser deletes the user from the arrayList
+
+---
