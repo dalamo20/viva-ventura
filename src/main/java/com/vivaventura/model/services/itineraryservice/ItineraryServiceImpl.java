@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ItineraryServiceImpl implements IItineraryService{
-    private Map<String, Itinerary> itineraryMap = new HashMap<>();
+    private final Map<String, Itinerary> itineraryMap = new HashMap<>();
     //create itinerary takes the itinerary name and a list of Activities as params
     //an instance of Itinerary is created and put into a Hashmap
     //the Map contains a key = itinerary name and a value = Itinerary object

@@ -7,6 +7,8 @@ import com.vivaventura.model.services.userservice.IUserService;
 import com.vivaventura.model.services.loginservice.LoginServiceImpl;
 import com.vivaventura.model.services.userservice.UserServiceImpl;
 
+import java.util.ArrayList;
+
 public class ServiceFactory {
 
     public ILoginService getLoginService() {
@@ -14,7 +16,7 @@ public class ServiceFactory {
     }
 
     public IUserService getUserService() {
-        return new UserServiceImpl();
+        return new UserServiceImpl(new ArrayList<>());
     }
 
     public IItineraryService getItineraryService() {
