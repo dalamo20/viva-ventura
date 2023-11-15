@@ -39,7 +39,7 @@ class ServiceFactoryTest {
     void getService() {
         ILoginService loginService;
         try {
-            loginService = (ILoginService)serviceFactory.getService("ILoginService");
+            loginService = (ILoginService)serviceFactory.getService("loginService");
             assertTrue(loginService instanceof LoginServiceImpl);
             System.out.println("testGetLoginService PASSED");
         } catch (ServiceLoadException e) {
@@ -51,7 +51,7 @@ class ServiceFactoryTest {
     void getUserService() {
         IUserService userService;
         try {
-            userService = (IUserService) serviceFactory.getService("IUserService");
+            userService = (IUserService) serviceFactory.getService("userService");
             assertNotNull(userService);
         } catch (ServiceLoadException e) {
             System.out.println(e.getMessage());
@@ -62,7 +62,7 @@ class ServiceFactoryTest {
     void getItineraryService() {
         IItineraryService itineraryService;
         try {
-            itineraryService = (IItineraryService) serviceFactory.getService("IItineraryService");
+            itineraryService = (IItineraryService) serviceFactory.getService("itineraryService");
             assertNotNull(itineraryService);
         } catch (ServiceLoadException e) {
             System.out.println(e.getMessage());
@@ -79,12 +79,12 @@ class ServiceFactoryTest {
         try (FileInputStream fis = new FileInputStream(propertyFileLocation)) {
             properties.load(fis);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("LAST TEST "+e.getMessage());
         }
         //testing keys in properties file
-        assertNotNull(properties.getProperty("ILoginService"));
-        assertNotNull(properties.getProperty("IUserService"));
-        assertNotNull(properties.getProperty("IItineraryService"));
+        assertNotNull(properties.getProperty("loginService"));
+        assertNotNull(properties.getProperty("userService"));
+        assertNotNull(properties.getProperty("itineraryService"));
     }
 
 }
