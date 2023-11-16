@@ -27,7 +27,7 @@ public class Driver {
 
         //WEEK 4
         try {
-            //store key service name in variable from applicaiton.properties
+            //store key service name in variable from application.properties
             String serviceName = "loginService";
             //create instance
             ServiceFactory serviceFactory = ServiceFactory.getInstance();

@@ -1,8 +1,6 @@
 package com.vivaventura.model.domain;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class ItineraryComposite implements Serializable {
     private static final long serialVersionUID = -334371602256955290L;
@@ -11,10 +9,14 @@ public class ItineraryComposite implements Serializable {
     private List<Location> locations;
     private List<Itinerary> itineraries;
 
-    public ItineraryComposite(){generateId();}
+    public ItineraryComposite(){
+        generateId();
+        this.activities = new ArrayList<>();
+    }
     public ItineraryComposite(long id, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
         generateId();
-        this.activities = activities;
+        this.activities = new ArrayList<>();
+        this.activities.addAll(activities);
         this.locations = locations;
         this.itineraries = itineraries;
     }
@@ -27,9 +29,10 @@ public class ItineraryComposite implements Serializable {
         this.id = id;
     }
     //Here I am going to generate the random id's
+    //using Math.abs to get positive numbers only
     public long generateId() {
-        this.id = UUID.randomUUID().getMostSignificantBits();
-        System.out.println("ID generated: " + id);
+        Random rand = new Random();
+        this.id = Math.abs(rand.nextLong());
         return id;
     }
 

@@ -52,10 +52,17 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - deleteItinerary() deletes an itinerary by its name. 
 
 
-### WEEK 4 
+## WEEK 4 
 <img width="1438" alt="serviceFactoryTest2" src="https://github.com/dalamo20/viva-ventura/assets/35320043/c83fb5ac-546a-4485-83d6-4c73138b4d66">
 
 - Here I am utilizing the getImplName method from ServiceFactory to read the implementation class name from the application.properties file and then dynamically loads the class using reflection.
 - The unit tests confirm that I am dynamically loading the implementation class. 
+
+## WEEK 5
+### Unit Test for ItineraryCompServiceImplTest 
+<img width="1661" alt="ItineraryCompServiceImplTest" src="https://github.com/dalamo20/viva-ventura/assets/35320043/53e37009-b559-4e8e-963a-001e46de743d">
+
+- Here are tests that I am running on my composite service class that performs CRUD operations on the Itineraries.
+- Most of the methods here are using the id to access each itinerary. 
 
 ---
