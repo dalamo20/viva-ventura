@@ -27,16 +27,16 @@ public class Driver {
 
         //WEEK 4
         try {
+            //store key service name in variable from applicaiton.properties
+            String serviceName = "loginService";
+            //create instance
             ServiceFactory serviceFactory = ServiceFactory.getInstance();
-            String serviceName = "ILoginService";
+            //call service using key service name
+            IService loginService = serviceFactory.getService(serviceName);
 
-            IService service = serviceFactory.getService(serviceName);
-
-            if (service instanceof ILoginService) {
-                ILoginService loginService = (ILoginService) service;
-                loginService.authenticateUser(user1);
-            }
+            System.out.println("Service loaded successfully: " + loginService.getClass().getName());
         } catch (ServiceLoadException e) {
+            System.out.println("Error loading service: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -26,31 +26,27 @@ public class ServiceFactory {
             // which can be of any type (? is a wildcard).
             // Reference about Generics and Wildcards:http://docs.oracle.com/javase/tutorial/java/generics/wildcards.html
             Class<?> c = Class.forName(getImplName(serviceName));
-            return (IService) c.getDeclaredConstructor().newInstance();
-        } catch (Exception ex) {
+            return (IService) c.newInstance();
+        } catch (Exception excp) {
             serviceName = serviceName + " not loaded";
-            throw new ServiceLoadException(serviceName, ex);
+            throw new ServiceLoadException(serviceName, excp);
         }
+
     }
 
     private String getImplName(String serviceName) throws Exception {
-        //provide the correct key to retrieve the property value
-        String propertyKey = "Users.ypham.Desktop.danielProjects.msse670Java.viva-ventura.src.main.resources.application.properties";
+        Properties props = new Properties();
 
         //retrieve the property value using the key
-        String propertyFileLocation = System.getProperty(propertyKey);
+        String propertyFileLocation = System.getProperty("prop_location");
 
-        System.out.println("Property File Location passed : " + propertyFileLocation);
+        System.out.println("Property File Location passed : "
+                + propertyFileLocation);
+        FileInputStream fis = new FileInputStream(
+                propertyFileLocation);
 
-        try (FileInputStream fis = new FileInputStream(propertyFileLocation)) {
-            Properties props = new Properties();
-            props.load(fis);
-
-            String implName = props.getProperty(serviceName);
-            System.out.println("Service implementation for " + serviceName + ": " + implName);
-            return implName;
-        } catch (IOException e) {
-            throw new ServiceLoadException("IOException while loading properties file", e);
-        }
+        props.load(fis);
+        fis.close();
+        return props.getProperty(serviceName);
     }
 }

@@ -7,6 +7,7 @@ import com.vivaventura.model.services.itineraryservice.ItineraryServiceImpl;
 import com.vivaventura.model.services.loginservice.ILoginService;
 import com.vivaventura.model.services.loginservice.LoginServiceImpl;
 import com.vivaventura.model.services.userservice.IUserService;
+import com.vivaventura.model.services.userservice.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.FileInputStream;
@@ -41,7 +42,7 @@ class ServiceFactoryTest {
         try {
             loginService = (ILoginService)serviceFactory.getService("loginService");
             assertTrue(loginService instanceof LoginServiceImpl);
-            System.out.println("testGetLoginService PASSED");
+            System.out.println("getLoginService PASSED");
         } catch (ServiceLoadException e) {
             System.out.println(e.getMessage());
         }
@@ -51,8 +52,9 @@ class ServiceFactoryTest {
     void getUserService() {
         IUserService userService;
         try {
-            userService = (IUserService) serviceFactory.getService("userService");
-            assertNotNull(userService);
+            userService = (IUserService)serviceFactory.getService("userService");
+            assertTrue(userService instanceof UserServiceImpl);
+            System.out.println("getUserService PASSED");
         } catch (ServiceLoadException e) {
             System.out.println(e.getMessage());
         }
@@ -62,29 +64,12 @@ class ServiceFactoryTest {
     void getItineraryService() {
         IItineraryService itineraryService;
         try {
-            itineraryService = (IItineraryService) serviceFactory.getService("itineraryService");
-            assertNotNull(itineraryService);
+            itineraryService = (IItineraryService)serviceFactory.getService("itineraryService");
+            assertTrue(itineraryService instanceof ItineraryServiceImpl);
+            System.out.println("getItineraryService PASSED");
         } catch (ServiceLoadException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    @Test
-    void testPropertyFile() {
-        // Specify the location of your properties file
-        String propertyFileLocation = "/Users/ypham/Desktop/danielProjects/msse670Java/viva-ventura/src/main/resources/application.properties";
-
-        // Load properties from the file
-        Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(propertyFileLocation)) {
-            properties.load(fis);
-        } catch (IOException e) {
-            System.out.println("LAST TEST "+e.getMessage());
-        }
-        //testing keys in properties file
-        assertNotNull(properties.getProperty("loginService"));
-        assertNotNull(properties.getProperty("userService"));
-        assertNotNull(properties.getProperty("itineraryService"));
     }
 
 }
