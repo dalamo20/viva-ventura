@@ -1,12 +1,12 @@
 package com.vivaventura.model.business;
 
 import com.vivaventura.model.business.exception.ServiceLoadException;
-import com.vivaventura.model.domain.Profile;
-import com.vivaventura.model.domain.Subscription;
-import com.vivaventura.model.domain.User;
+import com.vivaventura.model.domain.*;
 import com.vivaventura.model.services.IService;
 import com.vivaventura.model.services.factory.ServiceFactory;
 import com.vivaventura.model.services.loginservice.ILoginService;
+
+import java.util.List;
 
 public class Driver {
     public static void main(String[] args) throws ServiceLoadException {
@@ -39,6 +39,28 @@ public class Driver {
             System.out.println("Error loading service: " + e.getMessage());
             e.printStackTrace();
         }
+
+        //WEEK 5
+        //creating activities for the itinerary and use the composite class
+        Activity activity1 = new Activity("Food Tour", "2024-02-04", "09:00 AM", new Location("District 1"));
+        Activity activity2 = new Activity("Shopping", "2024-02-04", "07:00 PM", new Location("Ben Thanh Market"));
+        Activity activity3 = new Activity("Visit Island", "2024-02-10", "07:00 AM", new Location("Phú Quốc Island"));
+
+        Location location1 = new Location("Saigon");
+        Location location2 = new Location("Phú Quốc");
+
+        Itinerary itinerary1 = new Itinerary("Big City", List.of(activity1, activity2));
+        Itinerary itinerary2 = new Itinerary("Island Fun", List.of(activity3));
+
+//        ItineraryComposite itineraryComposite = new ItineraryComposite(
+//                List.of(activity1, activity2),
+//                List.of(location1, location2),
+//                List.of(itinerary1, itinerary2)
+//        );
+        //print ItineraryComposite
+//        System.out.println(itineraryComposite);
+
+
     }
 }
 
