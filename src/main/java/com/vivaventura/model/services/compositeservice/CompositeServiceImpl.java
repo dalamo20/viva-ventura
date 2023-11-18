@@ -5,7 +5,7 @@ import com.vivaventura.model.domain.ItineraryComposite;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ICompositeServiceImpl implements ICompositeService {
+public class CompositeServiceImpl implements ICompositeService {
     private final Map<Long, ItineraryComposite> itineraryComp = new HashMap<>();
     @Override
     public ItineraryComposite createItineraryComposite(ItineraryComposite itineraryComposite) {

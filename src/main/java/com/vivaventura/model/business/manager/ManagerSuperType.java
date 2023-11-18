@@ -1,12 +1,14 @@
 package com.vivaventura.model.business.manager;
 
 import com.vivaventura.model.business.exception.PropertyFileNotFoundException;
+import com.vivaventura.model.domain.ItineraryComposite;
+import com.vivaventura.model.services.manager.PropertyManager;
 
 import java.awt.*;
 
 public abstract class ManagerSuperType {
     /**
-     * What you seeing below, is called a static initializer block,
+     * What you're seeing below, is called a static initializer block,
      * which gets executed at the time when the class that contains it or extends it is referenced.
      *
      * What we hope to achieve in this application is that when the FleetRentalManager(which extends this class)
@@ -43,7 +45,7 @@ public abstract class ManagerSuperType {
      *         true
      *              if action is successful
      */
-    public abstract boolean performAction(String commandString, Composite composite);
+    public abstract boolean performAction(String commandString, ItineraryComposite itineraryComposite);
 
 
     /**

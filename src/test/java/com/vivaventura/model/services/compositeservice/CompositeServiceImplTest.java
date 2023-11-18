@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ICompositeServiceImplTest {
+class CompositeServiceImplTest {
     private ICompositeService itineraryCompService;
 
     @BeforeEach
     void setUp() {
-        itineraryCompService = new ICompositeServiceImpl();
+        itineraryCompService = new CompositeServiceImpl();
     }
 
     @Test

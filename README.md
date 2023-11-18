@@ -65,4 +65,11 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - Here are tests that I am running on my composite service class that performs CRUD operations on the Itineraries.
 - Most of the methods here are using the id to access each itinerary. 
 
+### Unit Test for LoginServiceImplTest
+<img width="1678" alt="LoginServiceImplTest" src="https://github.com/dalamo20/viva-ventura/assets/35320043/54b6cf53-4c65-4c11-9d3f-e97c7619407e">
+
+- Here I am testing the LoginServiceImplTest service class with the new PropertyManger.
+- The manager class is responsible for loading the property file into memory and make it available for all other classes to use.
+- The tests shows that my file is loaded and that the authenticateCustomer method works accordingly.
+
 ---
