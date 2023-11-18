@@ -26,27 +26,25 @@ class ItineraryServiceImplTest {
                         new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
                                 11.935173970248758, 108.4307517539685, 4.3f)))
         );
-
         //use createItinerary from IItineraryService
         itineraryService.createItinerary("1st Vacation Plan", itinerary1.getActivities());
-
         //returns true if itineraryService contains the key "1st Vacation Plan"
         assertTrue(itineraryService.getItinerary("1st Vacation Plan") != null);
     }
 
     @Test
     void getItinerary() {
-        //create instance of Itinerary
-        Itinerary itinerary1 = new Itinerary("1st Vacation Plan",
+        //create an instance of Itinerary
+        Itinerary itinerary1 = new Itinerary("1st Itinerary",
                 List.of(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
                         new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
                                 11.935173970248758, 108.4307517539685, 4.3f)))
         );
-        //use createItinerary from IItineraryService
-        itineraryService.createItinerary("1st Vacation Plan", itinerary1.getActivities());
+        //create another itinerary using the service
+        itineraryService.createItinerary("1st Itinerary", itinerary1.getActivities());
 
-        // Create an instance of Itinerary and use getItinerary from IItineraryService
-        Itinerary findItinerary = itineraryService.getItinerary("1st Vacation Plan");
+        //grab the
+        Itinerary findItinerary = itineraryService.getItinerary("1st Itinerary");
 
         //check if itinerary is not null
         assertNotNull(findItinerary);

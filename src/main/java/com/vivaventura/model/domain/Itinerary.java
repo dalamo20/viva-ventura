@@ -1,12 +1,15 @@
 package com.vivaventura.model.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class Itinerary implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
+    private long id;
     private String itineraryItemName;
     private List<Activity> activities;
 
@@ -55,5 +58,28 @@ public class Itinerary implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getItineraryItemName(), getActivities());
+    }
+
+    public void addActivity(Activity activity) {
+        if (activities == null) {
+            activities = new ArrayList<>();
+        }
+        //add activity to the list
+        activities.add(activity);
+    }
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+    //Here I am going to generate the random id's
+    //using Math.abs to get positive numbers only
+    public long generateId() {
+        if (id == 0) {
+            Random rand = new Random();
+            id = Math.abs(rand.nextLong());
+        }
+        return id;
     }
 }

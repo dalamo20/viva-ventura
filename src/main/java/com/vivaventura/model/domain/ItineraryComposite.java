@@ -13,8 +13,6 @@ public class ItineraryComposite implements Serializable {
     private List<Itinerary> itineraries;
 
     public ItineraryComposite(){
-        generateId();
-        this.activities = new ArrayList<>();
     }
 
     public ItineraryComposite(long id, User user, Subscription subscription, Profile profile, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
@@ -46,8 +44,10 @@ public class ItineraryComposite implements Serializable {
     //Here I am going to generate the random id's
     //using Math.abs to get positive numbers only
     public long generateId() {
-        Random rand = new Random();
-        this.id = Math.abs(rand.nextLong());
+        if (id == 0) {
+            Random rand = new Random();
+            id = Math.abs(rand.nextLong());
+        }
         return id;
     }
     public User getUser() {
@@ -102,17 +102,32 @@ public class ItineraryComposite implements Serializable {
         this.itineraries = itineraries;
     }
 
-    @Override
-    public String toString() {
-        return "ItineraryComposite{" +
-                "id=" + id +
-                ", user=" + user +
-                ", subscription=" + subscription +
-                ", profile=" + profile +
-                ", activities=" + activities +
-                ", locations=" + locations +
-                ", itineraries=" + itineraries +
-                '}';
+    public Itinerary createItinerary(String itineraryItemName, List<Activity> activities) {
+        Itinerary itinerary = new Itinerary(itineraryItemName, activities);
+        // You can add additional logic here if needed
+        return itinerary;
+    }
+
+    //add activity to a specific itinerary
+    public void addActivityToItinerary(long itineraryId, Activity activity) {
+        Itinerary itinerary = getItineraryById(itineraryId);
+        if (itinerary != null) {
+            itinerary.addActivity(activity);
+        }
+    }
+
+    // Method to get an itinerary by its ID
+    public Itinerary getItineraryById(long itineraryId) {
+        for (Itinerary itinerary : itineraries) {
+            if (itinerary.getId() == itineraryId) {
+                return itinerary;
+            }
+        }
+        return null;
+    }
+    //links user to this itinerary
+    public void linkUserToItinerary(User user) {
+        this.user = user;
     }
 
     @Override
@@ -125,5 +140,18 @@ public class ItineraryComposite implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getUser(), getSubscription(), getProfile(), getActivities(), getLocations(), getItineraries());
+    }
+
+    @Override
+    public String toString() {
+        return "ItineraryComposite{" +
+                "id=" + id +
+                ", user=" + user +
+                ", subscription=" + subscription +
+                ", profile=" + profile +
+                ", activities=" + activities +
+                ", locations=" + locations +
+                ", itineraries=" + itineraries +
+                '}';
     }
 }

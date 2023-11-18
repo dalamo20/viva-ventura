@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 public class Activity implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
+    private long id;
     private String name;
     private String date;
     private String time;
@@ -19,6 +21,14 @@ public class Activity implements Serializable {
 
     //Overloaded constructor
     public Activity(String name, String date, String time, Location location) {
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+    }
+
+    public Activity(long id, String name, String date, String time, Location location) {
+        this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
@@ -73,26 +83,46 @@ public class Activity implements Serializable {
         this.location = location;
     }
 
-    //Custom toString method
-
-    @Override
-    public String toString() {
-        return "Activity{" +
-                "Activity='" + name + '\'' +
-                ", Date=" + date +
-                ", Time=" + time +
-                '}';
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+    //Here I am going to generate the random id's
+    //using Math.abs to get positive numbers only
+    public long generateId() {
+        if (id == 0) {
+            Random rand = new Random();
+            id = Math.abs(rand.nextLong());
+        }
+        return id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Activity activity)) return false;
-        return Objects.equals(getName(), activity.getName()) && Objects.equals(getDate(), activity.getDate()) && Objects.equals(getTime(), activity.getTime()) && Objects.equals(getLocation(), activity.getLocation());
+        return getId() == activity.getId() &&
+                Objects.equals(getName(), activity.getName()) &&
+                Objects.equals(getDate(), activity.getDate()) &&
+                Objects.equals(getTime(), activity.getTime()) &&
+                Objects.equals(getLocation(), activity.getLocation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDate(), getTime(), getLocation());
+        return Objects.hash(getId(), getName(), getDate(), getTime(), getLocation());
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", location=" + location +
+                '}';
     }
 }
