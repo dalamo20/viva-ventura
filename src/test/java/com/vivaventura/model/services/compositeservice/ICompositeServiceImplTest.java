@@ -1,4 +1,4 @@
-package com.vivaventura.model.services.itinerarycompservice;
+package com.vivaventura.model.services.compositeservice;
 
 import com.vivaventura.model.domain.Activity;
 import com.vivaventura.model.domain.ItineraryComposite;
@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ItineraryCompServiceImplTest {
-    private IItineraryCompService itineraryCompService;
+class ICompositeServiceImplTest {
+    private ICompositeService itineraryCompService;
 
     @BeforeEach
     void setUp() {
-        itineraryCompService = new ItineraryCompServiceImpl();
+        itineraryCompService = new ICompositeServiceImpl();
     }
 
     @Test

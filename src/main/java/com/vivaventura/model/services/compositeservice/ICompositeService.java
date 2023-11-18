@@ -1,9 +1,10 @@
-package com.vivaventura.model.services.itinerarycompservice;
+package com.vivaventura.model.services.compositeservice;
 
 import com.vivaventura.model.domain.ItineraryComposite;
 import com.vivaventura.model.services.IService;
 
-public interface IItineraryCompService extends IService {
+public interface ICompositeService extends IService {
+    public final String NAME = "ICompositeService";
     ItineraryComposite createItineraryComposite(ItineraryComposite itineraryComposite);
 
     ItineraryComposite getItineraryCompositeById(long id);

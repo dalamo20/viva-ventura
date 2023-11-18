@@ -1,11 +1,11 @@
-package com.vivaventura.model.services.itinerarycompservice;
+package com.vivaventura.model.services.compositeservice;
 
 import com.vivaventura.model.domain.ItineraryComposite;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItineraryCompServiceImpl implements IItineraryCompService{
+public class ICompositeServiceImpl implements ICompositeService {
     private final Map<Long, ItineraryComposite> itineraryComp = new HashMap<>();
     @Override
     public ItineraryComposite createItineraryComposite(ItineraryComposite itineraryComposite) {
