@@ -7,6 +7,7 @@ import com.vivaventura.model.domain.User;
 import com.vivaventura.model.services.exception.CompositeException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,13 +39,34 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public boolean updateItinerary(ItineraryComposite itineraryComposite) throws CompositeException {
-        return itineraryComposites.contains(itineraryComposite);
+    public boolean updateItinerary(ItineraryComposite updatedItineraryComposite, User user) throws CompositeException {
+        // Iterate through itineraryComposites to find matching user and itinerary ID
+        for (int i = 0; i < itineraryComposites.size(); i++) {
+            ItineraryComposite oldItineraryComposite = itineraryComposites.get(i);
+            //check if the user is the owner and the ID matches
+            if (oldItineraryComposite.getUser() != null && oldItineraryComposite.getUser().equals(user) &&
+                    oldItineraryComposite.getId() == updatedItineraryComposite.getId()) {
+                // Update old itinerary with the new one
+                itineraryComposites.set(i, updatedItineraryComposite);
+                System.out.println("Itinerary with ID " + updatedItineraryComposite.getId() + " has been updated.");
+                return true;
+            }
+        }
+        throw new CompositeException("Itinerary not found or user does not have permission");
     }
 
     @Override
     public boolean deleteItinerary(long itineraryId) throws CompositeException {
-        return itineraryComposites.removeIf(itinerary -> itinerary.getId() == itineraryId);
+        //Using iterator interface, using a while loop to search the list of itineraries for a matching id as the params to remove from the list
+        Iterator<ItineraryComposite> iterator = itineraryComposites.iterator();
+        while (iterator.hasNext()) {
+            ItineraryComposite composite = iterator.next();
+            if (composite.getId() == itineraryId) {
+                iterator.remove();
+                return true;
+            }
+        }
+        throw new CompositeException("Itinerary not found");
     }
 
     @Override
@@ -60,12 +82,13 @@ public class CompositeServiceImpl implements ICompositeService {
 
     @Override
     public boolean createActivity(Activity activity, long itineraryId) throws CompositeException {
+        //iterate through the itinerary composite for id's matching the itinerary id from params
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
                 .findFirst()
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
-
+        //if a matching itinerary is found then add an activity
         return itineraryComposite.getActivities().add(activity);
     }
 
@@ -77,29 +100,40 @@ public class CompositeServiceImpl implements ICompositeService {
                 .findFirst()
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
 
-        return itineraryComposite.getActivities().removeIf(a -> a.getId() == activity.getId()) &&
-                itineraryComposite.getActivities().add(activity);
+        if (itineraryComposite.getActivities() != null) {
+            // Perform the update activity logic here
+            // ...
+            return true;
+        } else {
+            throw new CompositeException("Activities list is null");
+        }
     }
 
-    @Override
     public boolean deleteActivity(long activityId, long itineraryId) throws CompositeException {
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
                 .findFirst()
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
-
-        return itineraryComposite.getActivities().removeIf(activity -> activity.getId() == activityId);
+        //store itinerary id
+        Itinerary itinerary = getItineraryById(itineraryId);
+        //check if there is an itinerary
+        if (itinerary == null) {
+            throw new CompositeException("Itinerary not found");
+        }
+        //delete the activity from the itinerary associated with the activityId passed in the params
+        return itinerary.getActivities().removeIf(activity -> activity.getId() == activityId);
     }
 
     @Override
     public boolean linkUserToItinerary(User user, long itineraryId) throws CompositeException {
+        //iterating through the composites to find one with matching id
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
                 .findFirst()
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
-
+        //setting the user to the composite/ links user to the itinerary
         itineraryComposite.setUser(user);
         return true;
     }

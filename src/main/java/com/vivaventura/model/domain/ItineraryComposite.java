@@ -13,6 +13,8 @@ public class ItineraryComposite implements Serializable {
     private List<Itinerary> itineraries;
 
     public ItineraryComposite(){
+        //i need to initialize the itineraries arrayList in the constructor for deletes to work
+        this.itineraries = new ArrayList<>();
     }
 
     public ItineraryComposite(long id, User user, Subscription subscription, Profile profile, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
@@ -23,15 +25,14 @@ public class ItineraryComposite implements Serializable {
         this.profile = profile;
         this.activities = activities;
         this.locations = locations;
-        this.itineraries = itineraries;
+        this.itineraries = itineraries != null ? new ArrayList<>(itineraries) : new ArrayList<>();
     }
 
     public ItineraryComposite(long id, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
         generateId();
-        this.activities = new ArrayList<>();
-        this.activities.addAll(activities);
+        this.activities = new ArrayList<>(activities);
         this.locations = locations;
-        this.itineraries = itineraries;
+        this.itineraries = itineraries != null ? new ArrayList<>(itineraries) : new ArrayList<>();
     }
 
     public long getId() {
@@ -95,7 +96,7 @@ public class ItineraryComposite implements Serializable {
     }
 
     public List<Itinerary> getItineraries() {
-        return itineraries;
+        return new ArrayList<>(itineraries);
     }
 
     public void setItineraries(List<Itinerary> itineraries) {
@@ -104,7 +105,6 @@ public class ItineraryComposite implements Serializable {
 
     public Itinerary createItinerary(String itineraryItemName, List<Activity> activities) {
         Itinerary itinerary = new Itinerary(itineraryItemName, activities);
-        // You can add additional logic here if needed
         return itinerary;
     }
 
@@ -116,15 +116,14 @@ public class ItineraryComposite implements Serializable {
         }
     }
 
-    // Method to get an itinerary by its ID
+    //get itinerary by id
     public Itinerary getItineraryById(long itineraryId) {
-        for (Itinerary itinerary : itineraries) {
-            if (itinerary.getId() == itineraryId) {
-                return itinerary;
-            }
-        }
-        return null;
+        return itineraries.stream()
+                .filter(itinerary -> itinerary.getId() == itineraryId)
+                .findFirst()
+                .orElse(null);
     }
+
     //links user to this itinerary
     public void linkUserToItinerary(User user) {
         this.user = user;

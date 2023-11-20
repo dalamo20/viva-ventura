@@ -19,7 +19,7 @@ public interface ICompositeService extends IService {
 
     boolean createItinerary(ItineraryComposite itineraryComposite, User user) throws CompositeException;
 
-    boolean updateItinerary(ItineraryComposite itineraryComposite) throws CompositeException;
+    boolean updateItinerary(ItineraryComposite itineraryComposite, User user) throws CompositeException;
 
     boolean deleteItinerary(long itineraryId) throws CompositeException;
 
