@@ -1,40 +1,45 @@
 package com.vivaventura.presentation;
 
 import com.vivaventura.model.business.exception.ServiceLoadException;
+import com.vivaventura.model.business.manager.ItineraryManager;
 import com.vivaventura.model.domain.*;
 import com.vivaventura.model.services.IService;
 import com.vivaventura.model.services.factory.ServiceFactory;
 import com.vivaventura.model.services.loginservice.ILoginService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Driver {
     public static void main(String[] args) throws ServiceLoadException {
         String message = "";
-//        FlightReservationManager manager = FlightReservationManager.getInstance();
-//
-//        User user1 = new User("Password1", "catDaddy@gmail.com",
-//                new Profile("Johnny Blaze", "222-222-2222", "Berlin", true),
-//                new Subscription(true, true), "catDaddy");
-//        Flight flight = new Flight(200, "New York", "Los Angeles",
-//                LocalDateTime.parse("2021-04-15T12:00"),
-//                LocalDateTime.parse("2021-04-15T14:00"),
-//                "Airbus A320", 150);
-//
-//        Composite composite = new Composite();
-//        composite.setTraveler(traveler);
-//        composite.setFlight(flight);
-//
-//        //composite.setTraveler(null);;
-//
-//        boolean isBooked = manager.performAction("BOOKRESERVATION", composite);
+        System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
 
-        // Ignore the weird code in the sample code, which does the same thing as this.   It's a Java short cut.
-//        if (isBooked) {
-//            message = "SUCCESS:  FlightReservationMain:: - Traveler resistered.";
-//        } else {
-//            message = "FAIL:  FlightReservationMain:: - Traveler not registered.";
-//        }
+        ItineraryManager manager = ItineraryManager.getInstance();
+
+        User user = new User("Password1", "catDaddy@gmail.com",
+                new Profile("Johnny Blaze", "222-222-2222", "Berlin", true),
+                new Subscription(true, true), "catDaddy");
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+        activities.add(new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
+
+        boolean isCreated = manager.performAction("CREATE_ITINERARY", itineraryComposite, user);
+
+        if (isCreated) {
+            message = "SUCCESS: ItineraryMain:: - Itinerary created.";
+        } else {
+            message = "FAIL: ItineraryMain:: - Itinerary not created.";
+        }
 
         System.out.println(message);
 

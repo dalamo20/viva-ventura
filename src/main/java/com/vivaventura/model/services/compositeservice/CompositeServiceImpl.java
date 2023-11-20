@@ -40,13 +40,13 @@ public class CompositeServiceImpl implements ICompositeService {
 
     @Override
     public boolean updateItinerary(ItineraryComposite updatedItineraryComposite, User user) throws CompositeException {
-        // Iterate through itineraryComposites to find matching user and itinerary ID
+        //iterate through itineraryComposites to find matching user and itinerary ID
         for (int i = 0; i < itineraryComposites.size(); i++) {
             ItineraryComposite oldItineraryComposite = itineraryComposites.get(i);
             //check if the user is the owner and the ID matches
             if (oldItineraryComposite.getUser() != null && oldItineraryComposite.getUser().equals(user) &&
                     oldItineraryComposite.getId() == updatedItineraryComposite.getId()) {
-                // Update old itinerary with the new one
+                //update old itinerary with the new one
                 itineraryComposites.set(i, updatedItineraryComposite);
                 System.out.println("Itinerary with ID " + updatedItineraryComposite.getId() + " has been updated.");
                 return true;
@@ -57,7 +57,7 @@ public class CompositeServiceImpl implements ICompositeService {
 
     @Override
     public boolean deleteItinerary(long itineraryId) throws CompositeException {
-        //Using iterator interface, using a while loop to search the list of itineraries for a matching id as the params to remove from the list
+        //using iterator interface, using a while loop to search the list of itineraries for a matching id as the params to remove from the list
         Iterator<ItineraryComposite> iterator = itineraryComposites.iterator();
         while (iterator.hasNext()) {
             ItineraryComposite composite = iterator.next();
@@ -76,7 +76,6 @@ public class CompositeServiceImpl implements ICompositeService {
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
                 .findFirst()
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
-
         return itineraryComposite.getActivities();
     }
 
@@ -101,8 +100,7 @@ public class CompositeServiceImpl implements ICompositeService {
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
 
         if (itineraryComposite.getActivities() != null) {
-            // Perform the update activity logic here
-            // ...
+            // Needs update logic
             return true;
         } else {
             throw new CompositeException("Activities list is null");

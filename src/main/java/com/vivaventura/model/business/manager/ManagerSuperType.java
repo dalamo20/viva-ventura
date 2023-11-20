@@ -2,6 +2,7 @@ package com.vivaventura.model.business.manager;
 
 import com.vivaventura.model.business.exception.PropertyFileNotFoundException;
 import com.vivaventura.model.domain.ItineraryComposite;
+import com.vivaventura.model.domain.User;
 import com.vivaventura.model.services.manager.PropertyManager;
 
 import java.awt.*;
@@ -45,7 +46,7 @@ public abstract class ManagerSuperType {
      *         true
      *              if action is successful
      */
-    public abstract boolean performAction(String commandString, ItineraryComposite itineraryComposite);
+    public abstract boolean performAction(String commandString, ItineraryComposite itineraryComposite, User user);
 
 
     /**
