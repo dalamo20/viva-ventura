@@ -80,6 +80,36 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 <img width="1677" alt="driverSuccess" src="https://github.com/dalamo20/viva-ventura/assets/35320043/df5fc690-4044-4ef8-bde7-3915bbf144a3">
 
 - Here I was able to instantiate and configure the composite object and pass it to a service.
-- 
+
+## WEEK 6
+### SQLite Create Database
+<img width="1680" alt="createDB" src="https://github.com/dalamo20/viva-ventura/assets/35320043/61f6798a-677c-4a66-8c4b-f363d343a492">
+- Using createNewDatabase(String fileName) from CreateDB class, I was able to create vivaventura.db
+- The call was executed in the Driver class. 
+
+### SQLite Connection
+<img width="1680" alt="connection" src="https://github.com/dalamo20/viva-ventura/assets/35320043/2d9f59f0-699c-4982-9afa-155cfb803994">
+- To create a connection, I would create an instance of Connnect class and call connect(); 
+
+### SQLite Table Creation
+<img width="1680" alt="tableCreation" src="https://github.com/dalamo20/viva-ventura/assets/35320043/7464e0d1-0188-4f28-8030-66903a0c82ee">
+- By calling CreateTable.createNewTable() in my Driver class, I was able to generate all tables in CreateTable class.
+- It then defines SQL statements to create several tables (itinerary, activity, location, profile, subscription, and user) with specific columns and foreign key relationships. 
+- It executes these SQL statements to create the tables in the SQLite database, handling potential SQL exceptions by printing error messages to the console.
+
+### SQLite Insert Into Table
+<img width="1680" alt="insertTable" src="https://github.com/dalamo20/viva-ventura/assets/35320043/dea43202-bdbf-4698-adf2-8e6114256eea">
+- InsertRecord class provides methods for inserting records into various tables (itinerary, activity, location, profile, subscription, and user) using parameterized SQL statements. 
+- The getProfileId and getSubscriptionId private methods generate random IDs for the profile and subscription tables. 
+- It handles potential SQL exceptions by printing error messages to the console.
+
+### SQLite Select ALL Tables
+<img width="1680" alt="selectTables" src="https://github.com/dalamo20/viva-ventura/assets/35320043/59921aa8-d136-4991-a89a-b5a84786320b">
+- In SelectRecord class, the selectAll method retrieves metadata about all tables in the database using the DatabaseMetaData class. 
+- It iterates through each table, printing its name and column names. 
+- For each table, it executes a SELECT * query to fetch and display all data in that table, printing the results to the console. 
+- The code handles potential SQL exceptions by printing error messages to the console.
+
+### SQLite MORE METHODS TO COME... 
 
 ---
