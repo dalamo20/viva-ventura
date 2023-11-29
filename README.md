@@ -121,4 +121,9 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - Each method corresponds to a specific table, such as itinerary, activity, location, profile, subscription, and user. 
 - The methods take parameters representing the new values for the record and perform SQL UPDATE statements to modify the corresponding records in their respective tables based on the provided ID.
 
+### SQLite DELETE from Table
+<img width="1676" alt="deleteRecord" src="https://github.com/dalamo20/viva-ventura/assets/35320043/c485654a-0660-425e-a5af-ea85d5221421">
+- DeleteRecord class deletes a record from a specified table in the SQLite database. 
+- The deleteRecord method takes two parameters: the ID of the record to be deleted and the name of the table from which the record should be deleted. 
+
 ---

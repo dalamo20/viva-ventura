@@ -108,15 +108,15 @@ public class UpdateRecord {
 
     // Update record in activity table
     public void updateUser(int id, String newPassword, String newEmail, String newUsername) {
-        String sql = "UPDATE user SET newPassword = ?, newEmail = ?, newUsername = ? WHERE id = ?";
+        String sql = "UPDATE user SET newPassword = ?, email = ?, username = ? WHERE id = ?";
 
         try {
             Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newPassword);
             pstmt.setString(2, newEmail);
-            pstmt.setString(2, newUsername);
-            pstmt.setInt(3, id);
+            pstmt.setString(3, newUsername);
+            pstmt.setInt(4, id);
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {

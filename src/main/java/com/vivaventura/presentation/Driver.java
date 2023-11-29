@@ -93,6 +93,10 @@ public class Driver {
         //i must 1st select the id to update, then set the new name, date and time
 //        updatedRecord.updateActivity(2, "Updated_Activity", "2023-11-29", "14:00");
 
+        // Delete from activity table
+//        DeleteRecord deleteRec = new DeleteRecord();
+
+//        deleteRec.deleteRecord(3, "activity");
 
     }
 }
