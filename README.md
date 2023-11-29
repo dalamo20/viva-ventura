@@ -91,25 +91,34 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 <img width="1680" alt="connection" src="https://github.com/dalamo20/viva-ventura/assets/35320043/2d9f59f0-699c-4982-9afa-155cfb803994">
 - To create a connection, I would create an instance of Connnect class and call connect(); 
 
-### SQLite Table Creation
+### SQLite CREATE Table
 <img width="1680" alt="tableCreation" src="https://github.com/dalamo20/viva-ventura/assets/35320043/7464e0d1-0188-4f28-8030-66903a0c82ee">
 - By calling CreateTable.createNewTable() in my Driver class, I was able to generate all tables in CreateTable class.
 - It then defines SQL statements to create several tables (itinerary, activity, location, profile, subscription, and user) with specific columns and foreign key relationships. 
 - It executes these SQL statements to create the tables in the SQLite database, handling potential SQL exceptions by printing error messages to the console.
 
-### SQLite Insert Into Table
+### SQLite INSERT Into Table
 <img width="1680" alt="insertTable" src="https://github.com/dalamo20/viva-ventura/assets/35320043/dea43202-bdbf-4698-adf2-8e6114256eea">
 - InsertRecord class provides methods for inserting records into various tables (itinerary, activity, location, profile, subscription, and user) using parameterized SQL statements. 
 - The getProfileId and getSubscriptionId private methods generate random IDs for the profile and subscription tables. 
 - It handles potential SQL exceptions by printing error messages to the console.
 
-### SQLite Select ALL Tables
+### SQLite SELECT ALL Tables
 <img width="1680" alt="selectTables" src="https://github.com/dalamo20/viva-ventura/assets/35320043/59921aa8-d136-4991-a89a-b5a84786320b">
 - In SelectRecord class, the selectAll method retrieves metadata about all tables in the database using the DatabaseMetaData class. 
 - It iterates through each table, printing its name and column names. 
 - For each table, it executes a SELECT * query to fetch and display all data in that table, printing the results to the console. 
 - The code handles potential SQL exceptions by printing error messages to the console.
 
-### SQLite MORE METHODS TO COME... 
+## WEEK 7
+### SQLite SELECT ALL Table
+<img width="1611" alt="selectSingleTable" src="https://github.com/dalamo20/viva-ventura/assets/35320043/abdf518d-5370-445c-8c13-c796d899ff0b">
+- Different from the above SelectAll method, rather than printing all tables and their respective data, selectTable allows me to print a single table and its' records. 
+
+### SQLite UPDATE Table
+<img width="1680" alt="updateRecord" src="https://github.com/dalamo20/viva-ventura/assets/35320043/f695e51d-e697-43ea-86f1-a5d9e400f5be">
+- The UpdateRecord class provides methods to update records in different tables of a SQLite database. 
+- Each method corresponds to a specific table, such as itinerary, activity, location, profile, subscription, and user. 
+- The methods take parameters representing the new values for the record and perform SQL UPDATE statements to modify the corresponding records in their respective tables based on the provided ID.
 
 ---
