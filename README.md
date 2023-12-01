@@ -52,10 +52,34 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - deleteItinerary() deletes an itinerary by its name. 
 
 
-### WEEK 4 
+## WEEK 4 
 <img width="1438" alt="serviceFactoryTest2" src="https://github.com/dalamo20/viva-ventura/assets/35320043/c83fb5ac-546a-4485-83d6-4c73138b4d66">
 
 - Here I am utilizing the getImplName method from ServiceFactory to read the implementation class name from the application.properties file and then dynamically loads the class using reflection.
 - The unit tests confirm that I am dynamically loading the implementation class. 
+
+## WEEK 5
+### Unit Test for CompositeServiceImplTest 
+<img width="1680" alt="compositeImpl" src="https://github.com/dalamo20/viva-ventura/assets/35320043/89a4f924-b81e-4e13-a098-093234c1215e">
+
+- Here are tests that I am running on my composite service class that performs CRUD operations on Itineraries and Activities inside the itinerary. 
+- This is an example of updating an existing itinerary. 
+- A User is created, then the list of Activities.
+- The itinerary is then named and the list of Activities are stored in it. 
+- An itinerary composite is created storing the user information and itinerary. 
+- The method then goes on showing an example of how I can update the name of the existing itinerary.
+
+### Unit Test for LoginServiceImplTest
+<img width="1678" alt="LoginServiceImplTest" src="https://github.com/dalamo20/viva-ventura/assets/35320043/54b6cf53-4c65-4c11-9d3f-e97c7619407e">
+
+- Here I am testing the LoginServiceImplTest service class with the new PropertyManger.
+- The manager class is responsible for loading the property file into memory and make it available for all other classes to use.
+- The tests shows that my file is loaded and that the authenticateCustomer method works accordingly.
+
+### Presentation Layer
+<img width="1677" alt="driverSuccess" src="https://github.com/dalamo20/viva-ventura/assets/35320043/df5fc690-4044-4ef8-bde7-3915bbf144a3">
+
+- Here I was able to instantiate and configure the composite object and pass it to a service.
+- 
 
 ---
