@@ -4,12 +4,45 @@ import com.vivaventura.database.*;
 import com.vivaventura.model.business.exception.ServiceLoadException;
 import com.vivaventura.model.business.manager.ItineraryManager;
 import com.vivaventura.model.domain.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Driver {
+public class Driver extends Application {
+    private static Scene scene;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        scene = new Scene(loadFXML("primary"));
+        URL cssResource = getClass().getResource("styles.css");
+        if (cssResource != null) {
+            scene.getStylesheets().add(cssResource.toExternalForm());
+        } else {
+            System.err.println("Styles.css not found!");
+        }
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+
     public static void main(String[] args) throws ServiceLoadException {
+        launch(args);
+
         String message = "";
         System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
 
@@ -99,5 +132,6 @@ public class Driver {
 //        deleteRec.deleteRecord(3, "activity");
 
     }
+
 }
 
