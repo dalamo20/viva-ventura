@@ -9,4 +9,8 @@ public class SecondaryController {
     private void switchToPrimary() throws IOException {
         Driver.setRoot("primary");
     }
+    @FXML
+    private void switchToItinerary() throws IOException {
+        Driver.setRoot("create_itinerary");
+    }
 }

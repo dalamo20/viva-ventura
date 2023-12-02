@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.vivaventura.presentation.PrimaryController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vivaventura.presentation.PrimaryController">
 
-    <Button text="Switch to Secondary" onAction="#switchToSecondary" layoutX="20.0" layoutY="20.0"/>
+    <Button layoutX="236.0" layoutY="187.0" onAction="#switchToSecondary" text="Switch to Secondary" />
 
 </AnchorPane>

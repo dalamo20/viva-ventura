@@ -9,5 +9,6 @@
             prefHeight="400.0" prefWidth="600.0">
 
     <Button text="Switch to Primary" onAction="#switchToPrimary" layoutX="20.0" layoutY="20.0"/>
+    <Button text="Switch to Itinerary" onAction="#switchToItinerary" layoutX="20.0" layoutY="60.0"/>
 
 </AnchorPane>
