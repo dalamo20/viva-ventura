@@ -126,4 +126,18 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - DeleteRecord class deletes a record from a specified table in the SQLite database. 
 - The deleteRecord method takes two parameters: the ID of the record to be deleted and the name of the table from which the record should be deleted. 
 
+### JAVAFX & SceneBuilder (Itinerary Page)
+<img width="1507" alt="javaSceneBuilder" src="https://github.com/dalamo20/viva-ventura/assets/35320043/626ed83a-1a37-4968-8164-9d9cf2362693">
+- SceneBuilder assisted in helping me create the UI & controller for the Itierary Page. 
+- Using the sample controller, I was able to create logic for 'Create Itinerary' and 'Delete Itinerary' button. 
+- The image shows that the input appends to the view after clicking the 'Create' button.
+- By clicking on the name inside the 'View Itineraries' view, I can then click the 'Delete' button to remove that row.
+
+### JAVAFX & SceneBuilder (Activity Page)
+<img width="1267" alt="activityPage" src="https://github.com/dalamo20/viva-ventura/assets/35320043/ab60bb6d-5f0c-436b-a8d9-d3376777fd1d">
+- Using SceneBuilder, I created the Activity Page where the inputs would append to the tableView in their respective columns. 
+- The image shows that my UI is visible and when I create an activity, a grid displays which is a good indicator that an object was created. 
+- Unfortunately, there is a slight bug in the AddActivityController where the inputs are not appending to the tableView. 
+- Other than that, I am able to click on the empty row and delete it with the 'Delete' button. 
+
 ---

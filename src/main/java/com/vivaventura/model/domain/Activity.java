@@ -1,5 +1,8 @@
 package com.vivaventura.model.domain;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
@@ -15,6 +18,22 @@ public class Activity implements Serializable {
     private String date;
     private String time;
     private Location location;
+    //adding StringProperty to help link to Controller
+    private final StringProperty nameProperty = new SimpleStringProperty();
+    private final StringProperty dateProperty = new SimpleStringProperty();
+    private final StringProperty timeProperty = new SimpleStringProperty();
+
+    public StringProperty nameProperty() {
+        return nameProperty;
+    }
+
+    public StringProperty dateProperty() {
+        return dateProperty;
+    }
+
+    public StringProperty timeProperty() {
+        return timeProperty;
+    }
 
     //Default constructor
     public Activity(){}
