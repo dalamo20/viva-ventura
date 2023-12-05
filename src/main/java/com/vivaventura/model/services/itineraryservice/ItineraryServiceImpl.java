@@ -20,11 +20,20 @@ public class ItineraryServiceImpl implements IItineraryService{
         itineraryMap.put(itineraryItemName, itinerary);
         return itinerary;
     }
-    //get itinerary by name
+
     @Override
     public Itinerary getItinerary(String itineraryItemName) {
         return itineraryMap.get(itineraryItemName);
     }
+
+    @Override
+    public Itinerary getItineraryById(int itineraryId) {
+        return itineraryMap.values().stream()
+                .filter(itinerary -> itinerary.getId() == itineraryId)
+                .findFirst()
+                .orElse(null);
+    }
+
     //get all itineraries
     @Override
     public List<Itinerary> getAllItineraries() {

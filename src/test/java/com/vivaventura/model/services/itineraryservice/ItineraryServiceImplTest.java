@@ -33,30 +33,32 @@ class ItineraryServiceImplTest {
     }
 
     @Test
-    void getItinerary() {
-        //create an instance of Itinerary
-        Itinerary itinerary1 = new Itinerary("1st Itinerary",
-                List.of(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
-                        new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
-                                11.935173970248758, 108.4307517539685, 4.3f)))
-        );
-        //create another itinerary using the service
-        itineraryService.createItinerary("1st Itinerary", itinerary1.getActivities());
+    void getItineraryById() {
+        Itinerary createdItinerary = itineraryService.createItinerary("New Itinerary", List.of(
+                new Activity("New Activity", "2023-12-01", "10:00",
+                        new Location("New Location", "New Address", 0.0, 0.0, 4.5f))
+        ));
 
-        //grab the
-        Itinerary findItinerary = itineraryService.getItinerary("1st Itinerary");
-
-        //check if itinerary is not null
-        assertNotNull(findItinerary);
-
-        //check if the created itinerary is the same as the one retrieved
-        assertEquals(itinerary1, findItinerary);
+        Itinerary retrievedItinerary = itineraryService.getItineraryById(createdItinerary.getId());
+        assertNotNull(retrievedItinerary);
+        assertEquals(createdItinerary, retrievedItinerary);
     }
 
     @Test
     void getAllItineraries() {
-        //check list of itineraries is not null
-        assertNotNull(itineraryService.getAllItineraries());
+        itineraryService.createItinerary("Itinerary 1", List.of(
+                new Activity("Activity 1", "2023-12-01", "10:00",
+                        new Location("Location 1", "Address 1", 0.0, 0.0, 4.5f))
+        ));
+        itineraryService.createItinerary("Itinerary 2", List.of(
+                new Activity("Activity 2", "2023-12-02", "11:00",
+                        new Location("Location 2", "Address 2", 0.0, 0.0, 4.0f))
+        ));
+
+        List<Itinerary> allItineraries = itineraryService.getAllItineraries();
+        System.out.println("Get all itineraries: " + allItineraries);
+        assertNotNull(allItineraries);
+        assertEquals(2, allItineraries.size());
     }
 
     @Test
@@ -80,8 +82,10 @@ class ItineraryServiceImplTest {
         Itinerary res = itineraryService.updateItinerary("1st Vacation Plan", updatedItinerary);
 
         //checks if the updated obj is null, then checks if the results are the same as the updatedItinerary obj
+        System.out.println("Before Update: " + itinerary1);
         assertNotNull(res);
         assertEquals(updatedItinerary, res);
+        System.out.println("After Update: " + res);
 
         //checks if the first itinerary is in the list
         assertFalse(itineraryService.getAllItineraries().contains(itinerary1));

@@ -100,14 +100,6 @@ public class Activity implements Serializable {
         this.id = id;
     }
 
-//    public long generateId() {
-//        if (id == 0) {
-//            Random rand = new Random();
-//            id = Math.abs(rand.nextLong());
-//        }
-//        return id;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

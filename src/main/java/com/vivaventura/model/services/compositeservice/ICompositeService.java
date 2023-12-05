@@ -15,24 +15,24 @@ public interface ICompositeService extends IService {
     //itinerary CRUD
     List<Itinerary> listUserItineraries(User user) throws CompositeException;
 
-    Itinerary getItineraryById(long id) throws CompositeException;
+    Itinerary getItineraryById(int id) throws CompositeException;
 
     boolean createItinerary(ItineraryComposite itineraryComposite, User user) throws CompositeException;
 
     boolean updateItinerary(ItineraryComposite itineraryComposite, User user) throws CompositeException;
 
-    boolean deleteItinerary(long itineraryId) throws CompositeException;
+    boolean deleteItinerary(int itineraryId) throws CompositeException;
 
     //activity CRUD
-    List<Activity> listActivitiesInItinerary(long itineraryId) throws CompositeException;
+    List<Activity> listActivitiesInItinerary(int itineraryId) throws CompositeException;
 
-    boolean createActivity(Activity activity, long itineraryId) throws CompositeException;
+    boolean createActivity(Activity activity, int itineraryId) throws CompositeException;
 
-    boolean updateActivity(Activity activity, long itineraryId) throws CompositeException;
+    boolean updateActivity(Activity activity, int itineraryId) throws CompositeException;
 
-    boolean deleteActivity(long activityId, long itineraryId) throws CompositeException;
+    boolean deleteActivity(int activityId, int itineraryId) throws CompositeException;
 
     //linking a user to an itinerary
-    boolean linkUserToItinerary(User user, long itineraryId) throws CompositeException;
+    boolean linkUserToItinerary(User user, int itineraryId) throws CompositeException;
 
 }

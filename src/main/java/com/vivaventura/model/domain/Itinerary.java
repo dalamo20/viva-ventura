@@ -53,7 +53,6 @@ public class Itinerary implements Serializable {
                 '}';
     }
 
-
     public void addActivity(Activity activity) {
         if (activities == null) {
             activities = new ArrayList<>();
@@ -80,12 +79,15 @@ public class Itinerary implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Itinerary itinerary)) return false;
-        return getId() == itinerary.getId() && Objects.equals(getName(), itinerary.getName()) && Objects.equals(getActivities(), itinerary.getActivities());
+        if (o == null || getClass() != o.getClass()) return false;
+        Itinerary itinerary = (Itinerary) o;
+        return getId() == itinerary.getId() &&
+                Objects.equals(getName(), itinerary.getName()) &&
+                Objects.equals(getActivities(), itinerary.getActivities());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getActivities());
+        return Objects.hash(getName(), getActivities());
     }
 }
