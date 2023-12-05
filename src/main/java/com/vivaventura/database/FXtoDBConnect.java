@@ -29,15 +29,15 @@ public class FXtoDBConnect {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-//                int id = Integer.parseInt(rs.getString("id"));
-//                String name = rs.getString("activity_name");
-//                String date = rs.getString("date");
-//                String time = rs.getString("time");
-//
-//                activityList.add(new Activity(id, name, date, time));
-                activityList.add(new Activity(Integer.parseInt(rs.getString("id")), rs.getString("activity_name"), rs.getString("date"), rs.getString("time")));
+                int id = Integer.parseInt(rs.getString("id"));
+                String name = rs.getString("activity_name");
+                String date = rs.getString("date");
+                String time = rs.getString("time");
+
+                activityList.add(new Activity(id, name, date, time));
+//                activityList.add(new Activity(Integer.parseInt(rs.getString("id")), rs.getString("activity_name"), rs.getString("date"), rs.getString("time")));
             }
-//            conn.close();
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
