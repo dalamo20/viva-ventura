@@ -192,4 +192,9 @@ public class AddActivityController implements Initializable {
         table_activity.setItems(sortedList);
     }
 
+    @FXML
+    void switchToItinerary() throws IOException {
+        Driver.setRoot("create_itinerary");
+    }
+
 }

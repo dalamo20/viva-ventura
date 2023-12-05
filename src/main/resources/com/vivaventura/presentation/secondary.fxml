@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.vivaventura.presentation.SecondaryController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00FFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vivaventura.presentation.SecondaryController">
 
-    <Button text="Switch to Primary" onAction="#switchToPrimary" layoutX="20.0" layoutY="20.0"/>
-    <Button text="Switch to Itinerary" onAction="#switchToItinerary" layoutX="20.0" layoutY="60.0"/>
+    <Button layoutX="113.0" layoutY="269.0" onAction="#switchToPrimary" prefWidth="150.0" text="BACK" />
+    <Button layoutX="342.0" layoutY="269.0" onAction="#switchToItinerary" prefWidth="150.0" text="Create Itinerary" />
+   <Text layoutX="113.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The only app you need to plan all your adventures.">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Text>
+   <Text layoutX="152.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE an itinerary." />
+   <Text layoutX="152.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD activities for your planned trip." />
+   <Text layoutX="152.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changes in plans? UPDATE your itineraries activities." />
+   <Text layoutX="152.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Or simply just DELETE them from  your plans." />
 
 </AnchorPane>
