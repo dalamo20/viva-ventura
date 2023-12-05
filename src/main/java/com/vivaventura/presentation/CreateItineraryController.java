@@ -26,9 +26,13 @@ public class CreateItineraryController {
         listOfItineraries.getItems().remove(selectedIndex);
     }
 
+//    @FXML
+//    void switchToAddActivity() throws IOException {
+//        Driver.setRoot("add_activity");
+//    }
     @FXML
     void switchToAddActivity() throws IOException {
-        Driver.setRoot("add_activity");
+        Driver.setRoot("activities_page");
     }
 
     @FXML

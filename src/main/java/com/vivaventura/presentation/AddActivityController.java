@@ -1,65 +1,56 @@
 package com.vivaventura.presentation;
 
+import com.vivaventura.database.FXtoDBConnect;
 import com.vivaventura.model.domain.Activity;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
-public class AddActivityController {
+public class AddActivityController implements Initializable {
     @FXML
-    private TableColumn<Activity, String> date;
-
-    @FXML
-    private TextField dateField;
-
-    @FXML
-    private TableView<Activity> listOfActivities;
-
-    @FXML
-    private TableColumn<Activity, String> name;
+    private TableColumn<Activity, String> col_activityName;
 
     @FXML
-    private TextField nameField;
+    private TableColumn<Activity, String> col_date;
 
     @FXML
-    private TableColumn<Activity, String> time;
+    private TableColumn<Activity, Integer> col_id;
 
     @FXML
-    private TextField timeField;
+    private TableColumn<Activity, String> col_time;
 
     @FXML
-    private void initialize() {
-        //initialize the cell value factories for each column
-        name.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        date.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        time.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
+    private TableView<Activity> table_activity;
+
+    ObservableList<Activity> activityList;
+
+    int index = -1;
+
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pstmt = null;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        col_id.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("id"));
+        col_activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("name"));
+        col_date.setCellValueFactory(new PropertyValueFactory<Activity, String>("date"));
+        col_time.setCellValueFactory(new PropertyValueFactory<Activity, String>("time"));
+
+        activityList = FXtoDBConnect.getActivityData();
+        table_activity.setItems(activityList);
     }
 
-    @FXML
-    void addActivity(MouseEvent event) {
-        Activity activities = new Activity();
-        activities.setName(nameField.getText());
-        activities.setDate(dateField.getText());
-        activities.setTime(timeField.getText());
-        listOfActivities.getItems().add(activities);
-
-        nameField.clear();
-        dateField.clear();
-        timeField.clear();
-    }
-
-    @FXML
-    void deleteActivity(MouseEvent event) {
-        int selectedIndex = listOfActivities.getSelectionModel().getSelectedIndex();
-        listOfActivities.getItems().remove(selectedIndex);
-    }
-    @FXML
-    private void switchToCreateItinerary() throws IOException {
-        Driver.setRoot("create_itinerary");
-    }
 }
