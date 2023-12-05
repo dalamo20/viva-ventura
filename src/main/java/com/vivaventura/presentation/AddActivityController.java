@@ -4,6 +4,8 @@ import com.vivaventura.database.Connect;
 import com.vivaventura.database.FXtoDBConnect;
 import com.vivaventura.model.domain.Activity;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -43,9 +45,13 @@ public class AddActivityController implements Initializable {
     private TextField input_id;
 
     @FXML
+    private TextField input_filter;
+
+    @FXML
     private TableView<Activity> table_activity;
 
     ObservableList<Activity> activityList;
+    ObservableList<Activity> dataList;
 
     int index = -1;
 
@@ -80,6 +86,7 @@ public class AddActivityController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableRefresh();
+        searchActivity();
     }
 
     //select data from the activity table
@@ -107,6 +114,7 @@ public class AddActivityController implements Initializable {
             pstmt.execute();
             conn.close();
             tableRefresh();
+            searchActivity();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -125,9 +133,63 @@ public class AddActivityController implements Initializable {
             pstmt.executeUpdate();
             conn.close();
             tableRefresh();
+            searchActivity();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void deleteActivity(){
+        String sql = "DELETE FROM activity WHERE id = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // set the corresponding param
+            pstmt.setString(1, input_id.getText());
+            // execute the delete statement
+            pstmt.executeUpdate();
+            tableRefresh();
+            searchActivity();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    void searchActivity(){
+        col_id.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("id"));
+        col_activityName.setCellValueFactory(new PropertyValueFactory<Activity, String>("name"));
+        col_date.setCellValueFactory(new PropertyValueFactory<Activity, String>("date"));
+        col_time.setCellValueFactory(new PropertyValueFactory<Activity, String>("time"));
+
+        dataList = FXtoDBConnect.getActivityData();
+        table_activity.setItems(dataList);
+        FilteredList<Activity> filterList = new FilteredList<Activity>(dataList, b -> true);
+        input_filter.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterList.setPredicate(activity -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (activity.getName().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    //filter matches name field
+                    return true;
+                } else if (activity.getDate().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    //filter matches date field
+                    return true;
+                } else if (activity.getTime().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    //filter matches time field
+                    return true;
+                } else {
+                    //no match
+                    return false;
+                }
+            });
+        });
+
+        SortedList<Activity> sortedList = new SortedList<Activity>(filterList);
+        sortedList.comparatorProperty().bind(table_activity.comparatorProperty());
+        table_activity.setItems(sortedList);
     }
 
 }
