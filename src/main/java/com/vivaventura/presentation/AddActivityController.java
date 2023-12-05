@@ -54,8 +54,6 @@ public class AddActivityController implements Initializable {
     ObservableList<Activity> dataList;
 
     int index = -1;
-
-    ResultSet rs = null;
     PreparedStatement pstmt = null;
 
     private Connection connect() {

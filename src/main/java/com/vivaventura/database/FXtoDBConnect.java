@@ -1,6 +1,7 @@
 package com.vivaventura.database;
 
 import com.vivaventura.model.domain.Activity;
+import com.vivaventura.model.domain.Itinerary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -42,5 +43,28 @@ public class FXtoDBConnect {
             System.out.println(e.getMessage());
         }
         return activityList;
+    }
+
+    public static ObservableList<Itinerary> getItineraryData(){
+        Connection conn = connect();
+        ObservableList<Itinerary> itineraryList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM itinerary";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = Integer.parseInt(rs.getString("id"));
+                String name = rs.getString("itinerary_name");
+
+                itineraryList.add(new Itinerary(id, name));
+//                itineraryList.add(new Itinerary(Integer.parseInt(rs.getString("id")), rs.getString("itinerary_name")));
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return itineraryList;
     }
 }
