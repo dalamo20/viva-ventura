@@ -16,11 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Driver extends Application {
+    //container for JavaFX application
     private static Scene scene;
 
+    //overrides start method from Application class (main entry point)
     @Override
     public void start(Stage stage) throws IOException {
+        //contents of scene is loaded from primary fxml file using loadFXML
         scene = new Scene(loadFXML("primary"));
+        //making sure I can read stylesheet
         URL cssResource = getClass().getResource("styles.css");
         if (cssResource != null) {
             scene.getStylesheets().add(cssResource.toExternalForm());
@@ -28,19 +32,21 @@ public class Driver extends Application {
             System.err.println("Styles.css not found!");
         }
         stage.setScene(scene);
+        //display stage
         stage.show();
     }
-
+    //change root dynamically
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
-
+    //loads fxml file & returns root node as Parent
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
     public static void main(String[] args) throws ServiceLoadException {
+        //initializes the JavaFX runtime
         launch(args);
 
         String message = "";
