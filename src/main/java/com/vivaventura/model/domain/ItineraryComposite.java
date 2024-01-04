@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ItineraryComposite implements Serializable {
     private static final long serialVersionUID = -334371602256955290L;
-    private long id;
+    private int id;
     private User user;
     private Subscription subscription;
     private Profile profile;
@@ -17,7 +17,7 @@ public class ItineraryComposite implements Serializable {
         this.itineraries = new ArrayList<>();
     }
 
-    public ItineraryComposite(long id, User user, Subscription subscription, Profile profile, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
+    public ItineraryComposite(int id, User user, Subscription subscription, Profile profile, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
         generateId();
         this.id = id;
         this.user = user;
@@ -28,26 +28,26 @@ public class ItineraryComposite implements Serializable {
         this.itineraries = itineraries != null ? new ArrayList<>(itineraries) : new ArrayList<>();
     }
 
-    public ItineraryComposite(long id, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
+    public ItineraryComposite(int id, List<Activity> activities, List<Location> locations, List<Itinerary> itineraries) {
         generateId();
         this.activities = new ArrayList<>(activities);
         this.locations = locations;
         this.itineraries = itineraries != null ? new ArrayList<>(itineraries) : new ArrayList<>();
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     //Here I am going to generate the random id's
     //using Math.abs to get positive numbers only
-    public long generateId() {
+    public int generateId() {
         if (id == 0) {
             Random rand = new Random();
-            id = Math.abs(rand.nextLong());
+            id = Math.abs(rand.nextInt());
         }
         return id;
     }
@@ -109,7 +109,7 @@ public class ItineraryComposite implements Serializable {
     }
 
     //add activity to a specific itinerary
-    public void addActivityToItinerary(long itineraryId, Activity activity) {
+    public void addActivityToItinerary(int itineraryId, Activity activity) {
         Itinerary itinerary = getItineraryById(itineraryId);
         if (itinerary != null) {
             itinerary.addActivity(activity);
@@ -117,7 +117,7 @@ public class ItineraryComposite implements Serializable {
     }
 
     //get itinerary by id
-    public Itinerary getItineraryById(long itineraryId) {
+    public Itinerary getItineraryById(int itineraryId) {
         return itineraries.stream()
                 .filter(itinerary -> itinerary.getId() == itineraryId)
                 .findFirst()

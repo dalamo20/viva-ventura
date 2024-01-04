@@ -9,7 +9,7 @@ import java.util.Random;
 public class Itinerary implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
-    private long id;
+    private int id;
     private String name;
     private List<Activity> activities;
 
@@ -21,6 +21,11 @@ public class Itinerary implements Serializable {
         this.name = name;
         this.activities = activities;
         generateId();
+    }
+
+    public Itinerary(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {
@@ -39,26 +44,13 @@ public class Itinerary implements Serializable {
         this.activities = activities;
     }
 
-    //Custom toString method
     @Override
     public String toString() {
         return "Itinerary{" +
-                "List of activities=" + activities +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", activities=" + activities +
                 '}';
-    }
-
-    //Equals method
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Itinerary itinerary)) return false;
-        return Objects.equals(getName(), itinerary.getName()) && Objects.equals(getActivities(), itinerary.getActivities());
-    }
-
-    //Hashcode
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getActivities());
     }
 
     public void addActivity(Activity activity) {
@@ -68,19 +60,34 @@ public class Itinerary implements Serializable {
         //add activity to the list
         activities.add(activity);
     }
-    public long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     //Here I am going to generate the random id's
     //using Math.abs to get positive numbers only
-    public long generateId() {
+    public int generateId() {
         if (id == 0) {
             Random rand = new Random();
-            id = Math.abs(rand.nextLong());
+            id = Math.abs(rand.nextInt());
         }
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Itinerary itinerary = (Itinerary) o;
+        return getId() == itinerary.getId() &&
+                Objects.equals(getName(), itinerary.getName()) &&
+                Objects.equals(getActivities(), itinerary.getActivities());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getActivities());
     }
 }

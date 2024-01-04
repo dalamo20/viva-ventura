@@ -1,17 +1,54 @@
 package com.vivaventura.presentation;
 
+import com.vivaventura.database.*;
 import com.vivaventura.model.business.exception.ServiceLoadException;
 import com.vivaventura.model.business.manager.ItineraryManager;
 import com.vivaventura.model.domain.*;
-import com.vivaventura.model.services.IService;
-import com.vivaventura.model.services.factory.ServiceFactory;
-import com.vivaventura.model.services.loginservice.ILoginService;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Driver {
+public class Driver extends Application {
+    //container for JavaFX application
+    private static Scene scene;
+
+    //overrides start method from Application class (main entry point)
+    @Override
+    public void start(Stage stage) throws IOException {
+        //contents of scene is loaded from primary fxml file using loadFXML
+        scene = new Scene(loadFXML("primary"));
+        //making sure I can read stylesheet
+        URL cssResource = getClass().getResource("styles.css");
+        if (cssResource != null) {
+            scene.getStylesheets().add(cssResource.toExternalForm());
+        } else {
+            System.err.println("Styles.css not found!");
+        }
+        stage.setScene(scene);
+        //display stage
+        stage.show();
+    }
+    //change root dynamically
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+    //loads fxml file & returns root node as Parent
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Driver.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+
     public static void main(String[] args) throws ServiceLoadException {
+        //initializes the JavaFX runtime
+        launch(args);
+
         String message = "";
         System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
 
@@ -43,6 +80,64 @@ public class Driver {
 
         System.out.println(message);
 
+        //********************** WEEK 6 ****************************************************************
+//        // Create a new database
+//        CreateDB.createNewDatabase("vivaventura.db");
+//
+//        // Establish a connection to the database
+//        Connect.connect();
+//
+//        // Create new tables
+//        CreateTable.createNewTable();
+//
+//        // Insert new records
+//        InsertRecord insertRec = new InsertRecord();
+//        // Insert into users table
+//        insertRec.insertUser("pass1", "mrCats@gmail.com", "MrCats Profile", "222-222-2222", "Hawaii", true, true, "Mr.CoolCat");
+//        insertRec.insertUser("password2", "javaIsFun@gmail.com", "Java Profile", "222-333-4444", "Chicago", false, false, "OOP_Rock");
+//
+//        // Insert into profile table
+//        insertRec.insertProfile("Victor Timely", "222-222-2222", "Hawaii", true);
+//        insertRec.insertProfile("Johnny Blaze", "222-333-4444", "Illinois", false);
+//
+//        // Insert into subscription table
+//        insertRec.insertSubscription(true, true);
+//        insertRec.insertSubscription(false, false);
+//
+//        // Insert into activity table
+//        insertRec.insertActivity("Activity 1", "2023-01-01", "10:00 AM", 1, 1);
+//        insertRec.insertActivity("Activity 2", "2023-01-02", "02:00 PM", 2, 2);
+//
+//        // Insert into location table
+//        insertRec.insertLocation("Location 1", "Address 1", 20.7961, 156.3319, 4.5f, 1, 1);
+//        insertRec.insertLocation("Location 2", "Address 2", 40.6331, 89.3985, 4.8f, 2, 2);
+//
+//        // Insert into itinerary table
+//        insertRec.insertItinerary("Hawaii Trip");
+//        insertRec.insertItinerary("Illinois Trip");
+
+        // Select Records
+        SelectRecord select = new SelectRecord();
+
+        // Select from all tables
+//        select.selectAll();
+
+        //********************** WEEK 7 ****************************************************************
+        // Select from activity table
+        select.selectTable("activity");
+
+        // Update activity table
+//        UpdateRecord updatedRecord = new UpdateRecord();
+
+        //i must 1st select the id to update, then set the new name, date and time
+//        updatedRecord.updateActivity(2, "Updated_Activity", "2023-11-29", "14:00");
+
+        // Delete from activity table
+//        DeleteRecord deleteRec = new DeleteRecord();
+
+//        deleteRec.deleteRecord(3, "activity");
+
     }
+
 }
 

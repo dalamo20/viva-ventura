@@ -38,10 +38,6 @@ class UserServiceImplTest {
         assertNotNull(userExists);
         assertEquals(user1, userExists);
 
-        //The code below is supposed to return null because user does not exist
-//        User userExists2 = userService.getUserByUsername("cat_Daddy");
-//        assertNotNull(userExists2);
-//        assertEquals(user1, userExists2);
     }
 
     @Test

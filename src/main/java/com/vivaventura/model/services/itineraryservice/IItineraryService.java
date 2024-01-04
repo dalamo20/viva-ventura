@@ -12,6 +12,8 @@ public interface IItineraryService extends IService {
 
     Itinerary getItinerary(String itineraryItemName);
 
+    Itinerary getItineraryById(int itineraryId);
+
     List<Itinerary> getAllItineraries();
 
     Itinerary updateItinerary(String itineraryItemName, Itinerary updatedItinerary);

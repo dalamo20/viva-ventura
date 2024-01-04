@@ -1,5 +1,8 @@
 package com.vivaventura.model.domain;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
@@ -10,7 +13,7 @@ import java.util.UUID;
 public class Activity implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
-    private long id;
+    private int id;
     private String name;
     private String date;
     private String time;
@@ -27,12 +30,19 @@ public class Activity implements Serializable {
         this.location = location;
     }
 
-    public Activity(long id, String name, String date, String time, Location location) {
+    public Activity(int id, String name, String date, String time, Location location) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.time = time;
         this.location = location;
+    }
+
+    public Activity(int id, String name, String date, String time) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.time = time;
     }
 
     public Activity(String name, String location, String time) {
@@ -83,20 +93,11 @@ public class Activity implements Serializable {
         this.location = location;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
-    }
-    //Here I am going to generate the random id's
-    //using Math.abs to get positive numbers only
-    public long generateId() {
-        if (id == 0) {
-            Random rand = new Random();
-            id = Math.abs(rand.nextLong());
-        }
-        return id;
     }
 
     @Override

@@ -10,7 +10,6 @@ import com.vivaventura.model.services.exception.LoginException;
 import com.vivaventura.model.services.factory.ServiceFactory;
 import com.vivaventura.model.services.manager.PropertyManager;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

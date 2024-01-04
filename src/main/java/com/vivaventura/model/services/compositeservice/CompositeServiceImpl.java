@@ -24,12 +24,12 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public Itinerary getItineraryById(long id) throws CompositeException {
+    public Itinerary getItineraryById(int id) throws CompositeException {
         return itineraryComposites.stream()
                 .flatMap(itineraryComposite -> itineraryComposite.getItineraries().stream())
                 .filter(itinerary -> itinerary.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new CompositeException("Itinerary not found"));
+                .orElseThrow(() -> new CompositeException("Itinerary not found with ID: " + id));
     }
 
     @Override
@@ -56,7 +56,12 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public boolean deleteItinerary(long itineraryId) throws CompositeException {
+    public boolean deleteItinerary(int itineraryId) throws CompositeException {
+        Itinerary itinerary = getItineraryById(itineraryId);
+        if (itinerary == null) {
+            throw new CompositeException("Itinerary not found");
+        }
+        System.out.println("Deleting itinerary with ID: " + itineraryId);
         //using iterator interface, using a while loop to search the list of itineraries for a matching id as the params to remove from the list
         Iterator<ItineraryComposite> iterator = itineraryComposites.iterator();
         while (iterator.hasNext()) {
@@ -70,7 +75,7 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public List<Activity> listActivitiesInItinerary(long itineraryId) throws CompositeException {
+    public List<Activity> listActivitiesInItinerary(int itineraryId) throws CompositeException {
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
@@ -80,7 +85,7 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public boolean createActivity(Activity activity, long itineraryId) throws CompositeException {
+    public boolean createActivity(Activity activity, int itineraryId) throws CompositeException {
         //iterate through the itinerary composite for id's matching the itinerary id from params
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
@@ -92,7 +97,7 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public boolean updateActivity(Activity activity, long itineraryId) throws CompositeException {
+    public boolean updateActivity(Activity activity, int itineraryId) throws CompositeException {
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
@@ -100,14 +105,13 @@ public class CompositeServiceImpl implements ICompositeService {
                 .orElseThrow(() -> new CompositeException("Itinerary not found"));
 
         if (itineraryComposite.getActivities() != null) {
-            // Needs update logic
             return true;
         } else {
             throw new CompositeException("Activities list is null");
         }
     }
 
-    public boolean deleteActivity(long activityId, long itineraryId) throws CompositeException {
+    public boolean deleteActivity(int activityId, int itineraryId) throws CompositeException {
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()
                         .anyMatch(innerItinerary -> innerItinerary.getId() == itineraryId))
@@ -124,7 +128,7 @@ public class CompositeServiceImpl implements ICompositeService {
     }
 
     @Override
-    public boolean linkUserToItinerary(User user, long itineraryId) throws CompositeException {
+    public boolean linkUserToItinerary(User user, int itineraryId) throws CompositeException {
         //iterating through the composites to find one with matching id
         ItineraryComposite itineraryComposite = itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getItineraries().stream()

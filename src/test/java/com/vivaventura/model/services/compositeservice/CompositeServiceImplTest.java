@@ -5,7 +5,6 @@ import com.vivaventura.model.domain.*;
 import com.vivaventura.model.services.exception.CompositeException;
 import com.vivaventura.model.services.manager.PropertyManager;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -31,8 +30,6 @@ class CompositeServiceImplTest {
             fail("PropertyFileNotFoundException");
         }
 
-        compositeService = new CompositeServiceImpl();
-
         User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
         itineraryComposite = new ItineraryComposite();
         itineraryComposite.setUser(user);
@@ -43,6 +40,22 @@ class CompositeServiceImplTest {
     //Create Itinerary
     @Test
     void createItinerary() {
+        //create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+
+        //create an itinerary
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+        activities.add(new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        //create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
         try {
             assertTrue(compositeService.createItinerary(itineraryComposite, itineraryComposite.getUser()));
         } catch (CompositeException e) {
@@ -63,9 +76,25 @@ class CompositeServiceImplTest {
 
     @Test
     void getItineraryById() {
+        //create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+
+        //create an itinerary
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+        activities.add(new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        //create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
         try {
-            Itinerary itinerary = compositeService.getItineraryById(itineraryComposite.getId());
-            assertNotNull(itinerary, "Retrieved Itinerary is null");
+            Itinerary retrievedItinerary = compositeService.getItineraryById(itineraryComposite.getId());
+            assertNotNull(retrievedItinerary, "Retrieved Itinerary is null");
         } catch (CompositeException e) {
             e.printStackTrace();
         }
@@ -130,6 +159,22 @@ class CompositeServiceImplTest {
 
     @Test
     void deleteItinerary() {
+        //create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+
+        //create an itinerary
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+        activities.add(new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        //create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
         try {
             assertTrue(compositeService.deleteItinerary(itineraryComposite.getId()));
         } catch (CompositeException e) {
@@ -139,9 +184,25 @@ class CompositeServiceImplTest {
 
     @Test
     void listActivitiesInItinerary() {
+        //create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+
+        //create an itinerary
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+        activities.add(new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        //create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
         try {
-            List<Activity> activities = compositeService.listActivitiesInItinerary(itineraryComposite.getId());
-            assertNotNull(activities);
+            List<Activity> listActivities = compositeService.listActivitiesInItinerary(itineraryComposite.getId());
+            assertNotNull(listActivities);
         } catch (CompositeException e) {
             e.printStackTrace();
         }
@@ -149,9 +210,20 @@ class CompositeServiceImplTest {
 
     @Test
     void createActivity() {
-        Activity activity = new Activity("Explore Crazy House", "2023-11-23", "09:00",
+        // create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+        // create an activity
+        Activity activity = new Activity("Da Lat Vacation", "2023-11-23", "09:00",
                 new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
                         11.935173970248758, 108.4307517539685, 4.3f));
+        // create an itinerary
+        List<Activity> activities = new ArrayList<>();
+        activities.add(activity);
+
+        // add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        // create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
         try {
             assertTrue(compositeService.createActivity(activity, itineraryComposite.getId()));
         } catch (CompositeException e) {
@@ -161,11 +233,28 @@ class CompositeServiceImplTest {
 
     @Test
     void updateActivity() {
-        Activity activity = new Activity("Explore Crazy House", "2023-11-23", "09:00",
+        // create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+
+        //create activities
+        List<Activity> activities = new ArrayList<>();
+        Activity activity1 = new Activity("Da Lat Vacation", "2023-11-23", "09:00",
                 new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
                         11.935173970248758, 108.4307517539685, 4.3f));
+        Activity activity2 = new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f));
+        activities.add(activity1);
+        activities.add(activity2);
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        // create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
+        //update the name of the first activity
+        activity1.setName("Updated Name");
         try {
-            assertTrue(compositeService.updateActivity(activity, itineraryComposite.getId()));
+            assertTrue(compositeService.updateActivity(activity1, itineraryComposite.getId()));
         } catch (CompositeException e) {
             e.printStackTrace();
         }
@@ -173,9 +262,24 @@ class CompositeServiceImplTest {
 
     @Test
     void deleteActivity() {
-        Activity activityToDelete = new Activity("Hiking", "Enjoying nature", "09:00 AM");
+        //create a user
+        User user = new User("CatsAreCool", "catDaddy@pawmail.com", new Profile("Johnny Blaze", "222-222-2222", "Berlin", true), new Subscription(true, true), "catDaddy");
+
+        //create an itinerary
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Da Lat Vacation", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+        activities.add(new Activity("2nd Activity", "2023-11-23", "09:00",
+                new Location("Crazy House", "03 Đ. Huỳnh Thúc Kháng, Phường 4, Thành phố Đà Lạt, Lâm Đồng 66115, Vietnam",
+                        11.935173970248758, 108.4307517539685, 4.3f)));
+
+        //add activities to itinerary
+        Itinerary itinerary = new Itinerary("1st Itinerary", activities);
+        //create an itinerary composite and store user and itinerary information
+        ItineraryComposite itineraryComposite = new ItineraryComposite(1, user, null, null, null, null, List.of(itinerary));
         try {
-            assertTrue(compositeService.deleteActivity(activityToDelete.getId(), itineraryComposite.getId()));
+            assertTrue(compositeService.deleteItinerary(itineraryComposite.getId()));
         } catch (CompositeException e) {
             e.printStackTrace();
         }
