@@ -4,6 +4,7 @@ module viva.ventura {
     requires java.sql;
     requires java.datatransfer;
     requires java.desktop;
+    requires org.apache.logging.log4j;
     opens com.vivaventura.presentation to javafx.fxml;
     opens com.vivaventura.model.domain to javafx.base;
     opens com.vivaventura.database to javafx.base;

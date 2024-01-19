@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,6 +81,16 @@ public class Driver extends Application {
         }
 
         System.out.println(message);
+
+
+        Logger logger = LogManager.getLogger();
+        logger.trace("Trace Message!");
+        logger.debug("Debug Message!");
+        logger.info("Info Message!");
+        logger.warn("Warn Message!");
+        logger.error("Error Message!");
+        logger.fatal("Failure Message!");
+        System.out.println("Hello World!");
 
         //********************** WEEK 6 ****************************************************************
 //        // Create a new database
