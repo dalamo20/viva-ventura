@@ -2,12 +2,15 @@ package com.vivaventura.model.services.factory;
 
 import com.vivaventura.model.business.exception.ServiceLoadException;
 import com.vivaventura.model.services.IService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Properties;
 import java.io.FileInputStream;
 
 public class ServiceFactory {
+    private static final Logger logger = LogManager.getLogger(ServiceFactory.class);
     //Below is a Singleton Pattern that ensures that the class can only have one object
     //1. Private constructor created
     private ServiceFactory() {
@@ -40,7 +43,7 @@ public class ServiceFactory {
         //retrieve the property value using the key
         String propertyFileLocation = System.getProperty("prop_location");
 
-        System.out.println("Property File Location passed : "
+        logger.info("Property File Location passed : "
                 + propertyFileLocation);
         FileInputStream fis = new FileInputStream(
                 propertyFileLocation);

@@ -4,10 +4,13 @@ import com.vivaventura.model.domain.Activity;
 import com.vivaventura.model.domain.Itinerary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
 public class FXtoDBConnect {
+    private static final Logger logger = LogManager.getLogger(FXtoDBConnect.class);
     private static Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:src/main/resources/sqlite/vivaventura.db";
@@ -15,7 +18,7 @@ public class FXtoDBConnect {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error connecting", e);
         }
         return conn;
     }
@@ -36,11 +39,10 @@ public class FXtoDBConnect {
                 String time = rs.getString("time");
 
                 activityList.add(new Activity(id, name, date, time));
-//                activityList.add(new Activity(Integer.parseInt(rs.getString("id")), rs.getString("activity_name"), rs.getString("date"), rs.getString("time")));
             }
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error getting activity data ", e);
         }
         return activityList;
     }
@@ -59,11 +61,10 @@ public class FXtoDBConnect {
                 String name = rs.getString("itinerary_name");
 
                 itineraryList.add(new Itinerary(id, name));
-//                itineraryList.add(new Itinerary(Integer.parseInt(rs.getString("id")), rs.getString("itinerary_name")));
             }
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error getting itinerary data ", e);
         }
         return itineraryList;
     }

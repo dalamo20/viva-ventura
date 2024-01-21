@@ -1,18 +1,17 @@
 package com.vivaventura.presentation;
 
 import com.vivaventura.database.FXtoDBConnect;
-import com.vivaventura.model.domain.Activity;
 import com.vivaventura.model.domain.Itinerary;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +19,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class CreateItineraryController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(CreateItineraryController.class);
     @FXML
     private TableColumn<Itinerary, Integer> col_id;
 
@@ -46,7 +46,7 @@ public class CreateItineraryController implements Initializable {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error connecting to the database. URL: " + url, e);
         }
         return conn;
     }
@@ -89,7 +89,7 @@ public class CreateItineraryController implements Initializable {
             conn.close();
             tableRefresh();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error adding itinerary ", e);
         }
     }
 
@@ -103,7 +103,7 @@ public class CreateItineraryController implements Initializable {
             pstmt.executeUpdate();
             tableRefresh();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error deleting activity ", e);
         }
     }
 
@@ -119,7 +119,7 @@ public class CreateItineraryController implements Initializable {
             conn.close();
             tableRefresh();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating activity ", e);
         }
     }
 

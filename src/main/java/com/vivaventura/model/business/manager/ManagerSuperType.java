@@ -4,10 +4,13 @@ import com.vivaventura.model.business.exception.PropertyFileNotFoundException;
 import com.vivaventura.model.domain.ItineraryComposite;
 import com.vivaventura.model.domain.User;
 import com.vivaventura.model.services.manager.PropertyManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 
 public abstract class ManagerSuperType {
+    private static final Logger logger = LogManager.getLogger(ManagerSuperType.class);
     /**
      * What you're seeing below, is called a static initializer block,
      * which gets executed at the time when the class that contains it or extends it is referenced.
@@ -28,7 +31,7 @@ public abstract class ManagerSuperType {
         }
         catch (PropertyFileNotFoundException propertyFileNotFoundException)
         {
-            System.out.println ("Application Properties failed to be loaded - Application exiting...");
+            logger.info("Application Properties failed to be loaded - Application exiting...");
             System.exit(1); // since we can't load the properties and this being crucial we'll exit the application!
         }
     } // end of static initializer block
@@ -94,7 +97,7 @@ public abstract class ManagerSuperType {
         }
         else
         {
-            System.out.println("Property file location not set. Passed in value is: " + propertyFileLocation + ".");
+            logger.info("Property file location not set. Passed in value is: " + propertyFileLocation + ".");
             throw new PropertyFileNotFoundException ("Property file location not set", null);
         }
 

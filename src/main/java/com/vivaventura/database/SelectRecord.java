@@ -1,8 +1,12 @@
 package com.vivaventura.database;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class SelectRecord {
+    private static final Logger logger = LogManager.getLogger(SelectRecord.class);
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:src/main/resources/sqlite/vivaventura.db";
@@ -10,7 +14,7 @@ public class SelectRecord {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error connecting ", e);
         }
         return conn;
     }
@@ -23,25 +27,21 @@ public class SelectRecord {
             ResultSet tables = metaData.getTables(null, null, null, new String[]{"TABLE"});
             while (tables.next()) {
                 String tableName = tables.getString("TABLE_NAME");
-                System.out.println("Table: " + tableName);
+                logger.info("Table: " + tableName);
 
                 // Get the columns for each table
                 ResultSet columns = metaData.getColumns(null, null, tableName, null);
                 while (columns.next()) {
                     String columnName = columns.getString("COLUMN_NAME");
-                    System.out.print(columnName + "\t");
+                    logger.info(columnName + "\t");
                 }
-                System.out.println();
-
                 // Fetch and display data for each table
                 selectTable(conn, tableName);
-
-                System.out.println();
             }
 
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error selecting all tables", e);
         }
     }
 
@@ -51,25 +51,26 @@ public class SelectRecord {
             selectTable(conn, tableName);
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error selecting table: " + tableName, e);
         }
     }
 
-    private void selectTable(Connection conn, String tableName) throws SQLException {
-        // Fetch and display data for the specified table
-        String selectQuery = "SELECT * FROM " + tableName;
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(selectQuery);
+    private void selectTable(Connection conn, String tableName) {
+        try {
+            String selectQuery = "SELECT * FROM " + tableName;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(selectQuery);
 
-        // Loop through the result set
-        while (rs.next()) {
-            ResultSetMetaData rsMetaData = rs.getMetaData();
-            int columnCount = rsMetaData.getColumnCount();
+            while (rs.next()) {
+                ResultSetMetaData rsMetaData = rs.getMetaData();
+                int columnCount = rsMetaData.getColumnCount();
 
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(rs.getString(i) + "\t");
+                for (int i = 1; i <= columnCount; i++) {
+                    logger.info(rs.getString(i) + "\t");
+                }
             }
-            System.out.println();
+        } catch (SQLException e) {
+            logger.error("Error selecting table: " + tableName, e);
         }
     }
 }

@@ -1,10 +1,14 @@
 package com.vivaventura.database;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 public class CreateTable {
+    private static final Logger logger = LogManager.getLogger(CreateTable.class);
     public static void createNewTable() {
         //SQLite connection string
         String url = "jdbc:sqlite:src/main/resources/sqlite/vivaventura.db";
@@ -84,8 +88,9 @@ public class CreateTable {
             stmt.execute(profileTableSql);
             stmt.execute(subscriptionTableSql);
             stmt.execute(userTableSql);
+            logger.info("Tables created successfully.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error creating tables ", e);
         }
     }
 }

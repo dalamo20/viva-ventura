@@ -5,6 +5,8 @@ import com.vivaventura.model.domain.Itinerary;
 import com.vivaventura.model.domain.ItineraryComposite;
 import com.vivaventura.model.domain.User;
 import com.vivaventura.model.services.exception.CompositeException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 
 public class CompositeServiceImpl implements ICompositeService {
     private final List<ItineraryComposite> itineraryComposites = new ArrayList<>();
+    private static final Logger logger = LogManager.getLogger(CompositeServiceImpl.class);
 
     @Override
     public List<Itinerary> listUserItineraries(User user) throws CompositeException {
@@ -48,7 +51,7 @@ public class CompositeServiceImpl implements ICompositeService {
                     oldItineraryComposite.getId() == updatedItineraryComposite.getId()) {
                 //update old itinerary with the new one
                 itineraryComposites.set(i, updatedItineraryComposite);
-                System.out.println("Itinerary with ID " + updatedItineraryComposite.getId() + " has been updated.");
+                logger.debug("Itinerary with ID " + updatedItineraryComposite.getId() + " has been updated.");
                 return true;
             }
         }
@@ -61,7 +64,7 @@ public class CompositeServiceImpl implements ICompositeService {
         if (itinerary == null) {
             throw new CompositeException("Itinerary not found");
         }
-        System.out.println("Deleting itinerary with ID: " + itineraryId);
+        logger.debug("Deleting itinerary with ID: " + itineraryId);
         //using iterator interface, using a while loop to search the list of itineraries for a matching id as the params to remove from the list
         Iterator<ItineraryComposite> iterator = itineraryComposites.iterator();
         while (iterator.hasNext()) {

@@ -1,6 +1,5 @@
 package com.vivaventura.presentation;
 
-import com.vivaventura.database.Connect;
 import com.vivaventura.database.FXtoDBConnect;
 import com.vivaventura.model.domain.Activity;
 import javafx.collections.ObservableList;
@@ -13,6 +12,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class AddActivityController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(AddActivityController.class);
     @FXML
     private TableColumn<Activity, String> col_activityName;
 
@@ -63,7 +65,7 @@ public class AddActivityController implements Initializable {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error connecting to the database. URL: " + url, e);
         }
         return conn;
     }
@@ -114,7 +116,7 @@ public class AddActivityController implements Initializable {
             tableRefresh();
             searchActivity();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error adding activity ", e);
         }
     }
 
@@ -133,7 +135,7 @@ public class AddActivityController implements Initializable {
             tableRefresh();
             searchActivity();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating activity ", e);
         }
     }
 
@@ -148,7 +150,7 @@ public class AddActivityController implements Initializable {
             tableRefresh();
             searchActivity();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error deleting activity ", e);
         }
     }
 

@@ -1,10 +1,14 @@
 package com.vivaventura.database;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class UpdateRecord {
+    private static final Logger logger = LogManager.getLogger(UpdateRecord.class);
     private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:src/main/resources/sqlite/vivaventura.db";
@@ -12,7 +16,7 @@ public class UpdateRecord {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error connecting ", e);
         }
         return conn;
     }
@@ -29,7 +33,7 @@ public class UpdateRecord {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating itinerary table ", e);
         }
     }
 
@@ -47,7 +51,7 @@ public class UpdateRecord {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating record in activity table ", e);
         }
     }
 
@@ -66,7 +70,7 @@ public class UpdateRecord {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating record in location table ", e);
         }
     }
 
@@ -85,7 +89,7 @@ public class UpdateRecord {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating record in profile table ", e);
         }
     }
 
@@ -102,11 +106,11 @@ public class UpdateRecord {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating record in subscription table ", e);
         }
     }
 
-    // Update record in activity table
+    // Update record in User table
     public void updateUser(int id, String newPassword, String newEmail, String newUsername) {
         String sql = "UPDATE user SET newPassword = ?, email = ?, username = ? WHERE id = ?";
 
@@ -120,7 +124,7 @@ public class UpdateRecord {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error updating record in User table ", e);
         }
     }
 }

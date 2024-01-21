@@ -1,6 +1,8 @@
 package com.vivaventura.model.services.manager;
 
 import com.vivaventura.model.business.exception.PropertyFileNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -52,9 +54,9 @@ import java.util.Properties;
  *
  */
 
-public class PropertyManager
-{
+public class PropertyManager {
     private static Properties properties;
+    private static final Logger logger = LogManager.getLogger(PropertyManager.class);
 
     /**
      * Load the properties file so its contents are available
@@ -63,47 +65,36 @@ public class PropertyManager
      * @param propertyFileLocation
      * @throws PropertyFileNotFoundException
      */
-    public static void loadProperties(String propertyFileLocation) throws PropertyFileNotFoundException
-    {
+    public static void loadProperties(String propertyFileLocation) throws PropertyFileNotFoundException {
         properties = new Properties();
         FileInputStream sf = null;
-        try
-        {
+        try {
             sf = new FileInputStream(propertyFileLocation);
             properties.load(sf);
 
-            System.out.println("Property file successfully loaded from location: " + propertyFileLocation);
-            System.out.println("Property Contents: " + properties.toString());
+            logger.info("Property file successfully loaded from location: {}", propertyFileLocation);
+            logger.info("Property Contents: {}", properties.toString());
 
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.out.println("Property file not found.");
-            throw new PropertyFileNotFoundException ("Property File cannot be found.", fnfe);
-        }
-        catch (IOException ioe)
-        {
-            System.out.println("IOException while loading Properties file.");
-            throw new PropertyFileNotFoundException ("IOException while loading Properties file.", ioe);
-        }
-        catch (Exception excp)
-        {
-            System.out.println("Exception while loading Properties file.");
-            throw new PropertyFileNotFoundException ("Exception while loading Properties file.", excp);
-        }
-        finally
-        {
-            if (sf != null)
-            {
+        } catch (FileNotFoundException fnfe) {
+            logger.error("Property file not found.", fnfe);
+            throw new PropertyFileNotFoundException("Property File cannot be found.", fnfe);
+        } catch (IOException ioe) {
+            logger.error("IOException while loading Properties file.", ioe);
+            throw new PropertyFileNotFoundException("IOException while loading Properties file.", ioe);
+        } catch (Exception excp) {
+            logger.error("Exception while loading Properties file.", excp);
+            throw new PropertyFileNotFoundException("Exception while loading Properties file.", excp);
+        } finally {
+            if (sf != null) {
                 try {
                     sf.close();
                 } catch (IOException e) {
-                    // Can't do much here if exceptions occur, other then logging
-                    e.printStackTrace();
+                    //Can't do much here if exceptions occur, other than logging
+                    logger.error("IOException while closing FileInputStream.", e);
                 }
             }
         }
-    } //end loadProperties()
+    }
 
     /**
      * This methods returns the Value for the passed key.

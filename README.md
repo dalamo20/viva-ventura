@@ -181,4 +181,10 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - Matches are retained in the filterList, and a SortedList<Activity> is created for sorting compatibility. 
 - The table_activity is then updated to display the sorted and filtered data, providing users with an efficient search functionality for activities.
 
+## MSSE 672 WEEK 1
+### Added Log4J Library
+<img width="733" alt="Screenshot 2024-01-21 at 1 59 01 PM" src="https://github.com/dalamo20/viva-ventura/assets/35320043/096df558-3771-43e6-b64d-b67098dd6251">
+
+- All instances of System.out.println statements have been replaced with Log4j logging for improved code readability and maintainability.
+
 ---

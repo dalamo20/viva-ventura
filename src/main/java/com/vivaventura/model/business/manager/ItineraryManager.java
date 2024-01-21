@@ -6,6 +6,8 @@ import com.vivaventura.model.domain.User;
 import com.vivaventura.model.services.compositeservice.ICompositeService;
 import com.vivaventura.model.services.exception.CompositeException;
 import com.vivaventura.model.services.factory.ServiceFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *  FULL ARGUMENT (PUT THIS IN THE BOX AFTER CHANGING PATH)
@@ -16,6 +18,7 @@ import com.vivaventura.model.services.factory.ServiceFactory;
  *
  */
 public class ItineraryManager extends ManagerSuperType{
+    private static final Logger logger = LogManager.getLogger(ItineraryManager.class);
     private static ItineraryManager myInstance;
 
     private ItineraryManager() {};
@@ -47,9 +50,8 @@ public class ItineraryManager extends ManagerSuperType{
             action = createItinerary(ICompositeService.NAME, itineraryComposite, user);
         }
         else {
-            System.out.println("INFO:  Add new workflows here using here using if/else.");
+            logger.info("INFO:  Add new workflows here using here using if/else.");
         }
-
         return action;
     }
 
@@ -72,12 +74,12 @@ public class ItineraryManager extends ManagerSuperType{
             itineraryService = (ICompositeService) serviceFactory.getService(commandString);
             isCreated = itineraryService.createItinerary(itineraryComposite, user);
         } catch (ServiceLoadException e1) {
-            System.out.println("ERROR: ItineraryManager::failed to load Composite Service.");
+            logger.error("ERROR: ItineraryManager::failed to load Composite Service.", e1);
         } catch (CompositeException re) {
-            System.out.println("ERROR:  ItineraryManager::createItinerary() failed");
+            logger.error("ERROR:  ItineraryManager::createItinerary() failed", re);
             re.printStackTrace();
         } catch (Exception ex) {
-            System.out.println("ERROR: ItineraryManager::Unknown error.");
+            logger.error("ERROR: ItineraryManager::Unknown error.", ex);
         }
 
         return isCreated;

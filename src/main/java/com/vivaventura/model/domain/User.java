@@ -1,5 +1,8 @@
 package com.vivaventura.model.domain;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -8,6 +11,7 @@ import java.util.regex.Pattern;
 public class User implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 7661657477853633935L;
+    private static final Logger logger = LogManager.getLogger(User.class);
     private String password;
     private String email;
     private Profile profile;
@@ -20,20 +24,8 @@ public class User implements Serializable {
     //Overloaded constructor
     public User(String password, String email, Profile profile, Subscription subscription, String username) {
         // Perform null checks during object creation
-        if (password == null) {
-            throw new IllegalArgumentException("Password cannot be null");
-        }
-        if (email == null) {
-            throw new IllegalArgumentException("Email cannot be null");
-        }
-        if (profile == null) {
-            throw new IllegalArgumentException("Profile cannot be null");
-        }
-        if (subscription == null) {
-            throw new IllegalArgumentException("Subscription cannot be null");
-        }
-        if (username == null) {
-            throw new IllegalArgumentException("Username cannot be null");
+        if (password == null || email == null || profile == null || subscription == null || username == null) {
+            throw new IllegalArgumentException("Invalid input for User creation");
         }
 
         this.password = password;
@@ -57,7 +49,7 @@ public class User implements Serializable {
     public boolean validatePassword(String password){
         // Check length of password
         if (password.length() <= 12) {
-            System.out.println("Password is too short. It must be at least 12 characters long.");
+            logger.error("Password is too short. It must be at least 12 characters long.");
             return false;
         }
 
@@ -88,16 +80,16 @@ public class User implements Serializable {
 
         // Ensure there is at least one of each character type
         if (!hasUppercase) {
-            System.out.println("Password is missing an uppercase letter.");
+            logger.error("Password is missing an uppercase letter.");
         }
         if (!hasLowercase) {
-            System.out.println("Password is missing a lowercase letter.");
+            logger.error("Password is missing a lowercase letter.");
         }
         if (!hasDigit) {
-            System.out.println("Password is missing a digit.");
+            logger.error("Password is missing a digit.");
         }
         if (!hasSymbol) {
-            System.out.println("Password is missing a symbol.");
+            logger.error("Password is missing a symbol.");
         }
 
         return hasUppercase && hasLowercase && hasDigit && hasSymbol;

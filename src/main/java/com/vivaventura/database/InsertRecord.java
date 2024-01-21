@@ -1,5 +1,8 @@
 package com.vivaventura.database;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +10,8 @@ import java.sql.SQLException;
 import java.util.Random;
 
 public class InsertRecord {
+    private static final Logger logger = LogManager.getLogger(InsertRecord.class);
+
     private Connection connect() {
         //SQLite connection string
         String url = "jdbc:sqlite:src/main/resources/sqlite/vivaventura.db";
@@ -14,7 +19,7 @@ public class InsertRecord {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error connecting", e);
         }
         return conn;
     }
@@ -29,7 +34,7 @@ public class InsertRecord {
             pstmt.setString(1, itineraryName);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error inserting itinerary record", e);
         }
     }
 
@@ -46,7 +51,7 @@ public class InsertRecord {
             pstmt.setInt(5, itineraryId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error inserting activity record", e);
         }
     }
 
@@ -65,7 +70,7 @@ public class InsertRecord {
             pstmt.setInt(7, activityId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error inserting location record", e);
         }
     }
 
@@ -81,7 +86,7 @@ public class InsertRecord {
             pstmt.setBoolean(4, twoFactorAuthenticationEnabled);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error inserting profile record", e);
         }
     }
 
@@ -95,7 +100,7 @@ public class InsertRecord {
             pstmt.setBoolean(2, paymentConfirmed);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error inserting subscription record", e);
         }
     }
     //Insert record into the user table
@@ -116,7 +121,7 @@ public class InsertRecord {
             pstmt.setString(5, username);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error("Error inserting user record", e);
         }
     }
     //id's were giving issue for profile and subscription
