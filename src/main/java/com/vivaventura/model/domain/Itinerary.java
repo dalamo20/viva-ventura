@@ -26,6 +26,7 @@ public class Itinerary implements Serializable {
     public Itinerary(int id, String name) {
         this.id = id;
         this.name = name;
+        this.activities = new ArrayList<>();
     }
 
     public String getName() {
