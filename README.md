@@ -187,4 +187,12 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 
 - All instances of System.out.println statements have been replaced with Log4j logging for improved code readability and maintainability.
 
+## MSSE 672 WEEK 2
+### Data Structures
+<img width="851" alt="mapStructure" src="https://github.com/dalamo20/viva-ventura/assets/35320043/5de41182-30f1-46e3-aedf-f99a4adf5cc4">
+
+- Updating Composite class by creating a new composite to test along the project.
+- This new composite class will use the Map data structure as opposed to the last ItineraryComposite class that is using List. 
+- My rationale for making this change is that in both the best-case and worst-case scenarios, as this project continues to grow, Maps would likely outperform Lists at the expense of memory. 
+
 ---

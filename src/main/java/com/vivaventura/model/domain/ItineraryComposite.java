@@ -103,10 +103,10 @@ public class ItineraryComposite implements Serializable {
         this.itineraries = itineraries;
     }
 
-    public Itinerary createItinerary(String itineraryItemName, List<Activity> activities) {
-        Itinerary itinerary = new Itinerary(itineraryItemName, activities);
-        return itinerary;
-    }
+//    public Itinerary createItinerary(String itineraryItemName, List<Activity> activities) {
+//        Itinerary itinerary = new Itinerary(itineraryItemName, activities);
+//        return itinerary;
+//    }
 
     //add activity to a specific itinerary
     public void addActivityToItinerary(int itineraryId, Activity activity) {

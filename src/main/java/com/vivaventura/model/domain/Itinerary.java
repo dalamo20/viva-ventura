@@ -20,7 +20,7 @@ public class Itinerary implements Serializable {
     public Itinerary(String name, List<Activity> activities) {
         this.name = name;
         this.activities = activities;
-        generateId();
+//        generateId();
     }
 
     public Itinerary(int id, String name) {
@@ -45,6 +45,26 @@ public class Itinerary implements Serializable {
         this.activities = activities;
     }
 
+    public void addActivity(Activity activity) {
+        this.activities.add(activity);
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    //Might delete. Testing new Composite class
+//    public int generateId() {
+//        if (id == 0) {
+//            Random rand = new Random();
+//            id = Math.abs(rand.nextInt());
+//        }
+//        return id;
+//    }
+
     @Override
     public String toString() {
         return "Itinerary{" +
@@ -52,29 +72,6 @@ public class Itinerary implements Serializable {
                 ", name='" + name + '\'' +
                 ", activities=" + activities +
                 '}';
-    }
-
-    public void addActivity(Activity activity) {
-        if (activities == null) {
-            activities = new ArrayList<>();
-        }
-        //add activity to the list
-        activities.add(activity);
-    }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    //Here I am going to generate the random id's
-    //using Math.abs to get positive numbers only
-    public int generateId() {
-        if (id == 0) {
-            Random rand = new Random();
-            id = Math.abs(rand.nextInt());
-        }
-        return id;
     }
 
     @Override

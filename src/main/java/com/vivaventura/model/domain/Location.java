@@ -7,6 +7,7 @@ import java.util.UUID;
 public class Location implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
+    private int id;
     private String name;
     private String address;
     private double latitude;
@@ -16,7 +17,16 @@ public class Location implements Serializable {
     //Default constructor
     public Location(){}
 
-    //Overloaded constructor
+    public Location(int id, String name, String address, double latitude, double longitude, float rating) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.rating = rating;
+    }
+
+    //i will delete this soon. Testing new Composite class
     public Location(String name, String address, double latitude, double longitude, float rating) {
         this.name = name;
         this.address = address;
@@ -32,6 +42,14 @@ public class Location implements Serializable {
         }
 
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,14 +92,16 @@ public class Location implements Serializable {
         this.rating = rating;
     }
 
-    //Custom toString method
     @Override
     public String toString() {
-        return "Location{ " +
-                "Location name: '" + name + '\'' +
-                ", Address: '" + address + '\'' +
-                ", Rating: " + rating +
-                " }";
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", rating=" + rating +
+                '}';
     }
 
     //Equals method
