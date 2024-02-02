@@ -3,11 +3,14 @@ package com.vivaventura.model.domain;
 import com.vivaventura.model.domain.Activity;
 import com.vivaventura.model.domain.Itinerary;
 import com.vivaventura.model.domain.Location;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
 
 public class Composite implements Serializable {
+    private final Logger logger = LogManager.getLogger(Composite.class);
     private static final long serialVersionUID = 1L;
     private Map<Integer, Itinerary> itineraries;
     private Map<Integer, Activity> activities;
@@ -24,15 +27,27 @@ public class Composite implements Serializable {
     }
 
     public Itinerary getItinerary(int id) {
-        return itineraries.get(id);
+        Itinerary itinerary = itineraries.get(id);
+        return itinerary;
     }
 
     public void updateItinerary(Itinerary itinerary) {
-        itineraries.put(itinerary.getId(), itinerary);
+        if(itineraries.containsKey(itinerary.getId())){
+            itineraries.replace(itinerary.getId(), itinerary);
+            logger.info("Updated Itinerary with id: " + itinerary.getId() + ": " + itinerary);
+        }else{
+            throw new IllegalArgumentException("Itinerary with ID: " + itinerary.getId() + " does not exist." );
+        }
     }
 
     public void deleteItinerary(int id) {
-        itineraries.remove(id);
+        Itinerary removeItinerary = itineraries.remove(id);
+        if(removeItinerary != null){
+            logger.info("Deleted Itinerary with id " + id);
+        }else{
+            throw new IllegalArgumentException("Itinerary with ID: " + id + " does not exist.");
+        }
+
     }
 
     public void addActivity(Activity activity) {
@@ -40,15 +55,25 @@ public class Composite implements Serializable {
     }
 
     public Activity getActivity(int id) {
-        return activities.get(id);
+        Activity activity = activities.get(id);
+        return activity;
     }
 
     public void updateActivity(Activity activity) {
-        activities.put(activity.getId(), activity);
+        if(activities.containsKey(activity.getId())){
+            activities.replace(activity.getId(), activity);
+        }else{
+            throw new IllegalArgumentException("Activity with ID: " + activity.getId() + " does not exist.");
+        }
     }
 
     public void deleteActivity(int id) {
-        activities.remove(id);
+        Activity removeActivity = activities.remove(id);
+        if(removeActivity != null){
+            logger.info("Deleted activity with id " + id);
+        }else{
+            throw new IllegalArgumentException("Activity with ID: " + id + " does not exist.");
+        }
     }
 
     public void addLocation(Location location) {
@@ -56,15 +81,23 @@ public class Composite implements Serializable {
     }
 
     public Location getLocation(int id) {
-        return locations.get(id);
+        Location location = locations.get(id);
+        return location;
     }
 
     public void updateLocation(Location location) {
-        locations.put(location.getId(), location);
+        if(locations.containsKey(location.getId())){
+            locations.replace(location.getId(), location);
+        }
+        throw new IllegalArgumentException("Location with ID: " + location.getId() + " does not exist.");
     }
 
     public void deleteLocation(int id) {
-        locations.remove(id);
+        Location removeLocation = locations.remove(id);
+        if(removeLocation != null){
+            logger.info("Deleted location with ID: " + id + " is deleted.");
+        }
+        throw new IllegalArgumentException("Location with ID: " + id + " does not exist.");
     }
 
     public List<Itinerary> getAllItineraries() {
