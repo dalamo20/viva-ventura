@@ -1,6 +1,5 @@
 package com.vivaventura.presentation;
 
-import com.vivaventura.database.SelectRecord;
 import com.vivaventura.model.business.exception.ServiceLoadException;
 import com.vivaventura.model.business.manager.ItineraryManager;
 import com.vivaventura.model.domain.Activity;

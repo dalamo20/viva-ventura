@@ -1,17 +1,21 @@
 package com.vivaventura.model.services.itineraryservice;
 
 import com.vivaventura.model.domain.Activity;
+import com.vivaventura.model.domain.CompositeTest;
 import com.vivaventura.model.domain.Itinerary;
 import com.vivaventura.model.domain.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ItineraryServiceImplTest {
     private IItineraryService itineraryService;
+    private static final Logger logger = Logger.getLogger(CompositeTest.class.getName());
 
     @BeforeEach
     void setUp() {
@@ -30,6 +34,8 @@ class ItineraryServiceImplTest {
         itineraryService.createItinerary("1st Vacation Plan", itinerary1.getActivities());
         //returns true if itineraryService contains the key "1st Vacation Plan"
         assertTrue(itineraryService.getItinerary("1st Vacation Plan") != null);
+        Itinerary res = itineraryService.getItinerary("1st Vacation Plan");
+//        logger.log(Level.INFO, "Created Itinerary: " + res);
     }
 
     @Test
@@ -42,6 +48,7 @@ class ItineraryServiceImplTest {
         Itinerary retrievedItinerary = itineraryService.getItineraryById(createdItinerary.getId());
         assertNotNull(retrievedItinerary);
         assertEquals(createdItinerary, retrievedItinerary);
+//        logger.log(Level.INFO, "Retrieved Itinerary: " + retrievedItinerary);
     }
 
     @Test
@@ -59,6 +66,7 @@ class ItineraryServiceImplTest {
         System.out.println("Get all itineraries: " + allItineraries);
         assertNotNull(allItineraries);
         assertEquals(2, allItineraries.size());
+        logger.log(Level.INFO, "Retrieved All Itineraries: " + allItineraries);
     }
 
     @Test
@@ -89,6 +97,8 @@ class ItineraryServiceImplTest {
 
         //checks if the first itinerary is in the list
         assertFalse(itineraryService.getAllItineraries().contains(itinerary1));
+//        logger.log(Level.INFO, "Old Itinerary: " + itinerary1);
+//        logger.log(Level.INFO, "Updated Itinerary: " + res);
     }
 
     @Test
@@ -110,5 +120,7 @@ class ItineraryServiceImplTest {
 
         //check if itinerary is in list
         assertFalse(itineraryService.getAllItineraries().contains(itinerary1));
+
+//        logger.log(Level.INFO, "Is Itinerary Deleted? " + res);
     }
 }

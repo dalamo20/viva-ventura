@@ -1,5 +1,6 @@
 package com.vivaventura.model.services.userservice;
 
+import com.vivaventura.model.domain.CompositeTest;
 import com.vivaventura.model.domain.Profile;
 import com.vivaventura.model.domain.Subscription;
 import com.vivaventura.model.domain.User;
@@ -8,12 +9,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceImplTest {
     private IUserService userService;
     private List<User> users;
+    private static final Logger logger = Logger.getLogger(CompositeTest.class.getName());
 
     //initialize empty arrayList
     @BeforeEach
@@ -27,6 +31,7 @@ class UserServiceImplTest {
 
         userService.createUser(user1); //using createUser method from UserServiceImpl
         assertTrue(users.contains(user1)); //checking if arrayList contains the user
+//        logger.log(Level.INFO, "Created User: " + user1);
     }
 
     @Test
@@ -37,7 +42,7 @@ class UserServiceImplTest {
         User userExists = userService.getUserByUsername("catDaddy");
         assertNotNull(userExists);
         assertEquals(user1, userExists);
-
+//        logger.log(Level.INFO, "Retrieve User: " + userExists);
     }
 
     @Test
@@ -53,6 +58,8 @@ class UserServiceImplTest {
         assertNotNull(userExist);
         assertEquals(updateUser1, userExist);
         assertFalse(users.contains(user1));
+//        logger.log(Level.INFO, "Older User: " + user1);
+//        logger.log(Level.INFO, "Updated User: " + userExist);
     }
 
     @Test
@@ -62,5 +69,6 @@ class UserServiceImplTest {
         //calling deleteUser from UserServiceImpl
         userService.deleteUser("catDaddy");
         assertFalse(users.contains(user1));
+//        logger.log(Level.INFO, "User deleted: " + user1);
     }
 }
