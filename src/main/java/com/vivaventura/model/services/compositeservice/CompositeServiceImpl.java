@@ -19,6 +19,7 @@ public class CompositeServiceImpl implements ICompositeService {
 
     @Override
     public List<Itinerary> listUserItineraries(User user) throws CompositeException {
+        logger.info("List Itineraries for User "+ user.getUsername());
         return itineraryComposites.stream()
                 .filter(itinerary -> itinerary.getUser() != null && itinerary.getUser().equals(user))
                 .map(ItineraryComposite::getItineraries)
@@ -28,6 +29,7 @@ public class CompositeServiceImpl implements ICompositeService {
 
     @Override
     public Itinerary getItineraryById(int id) throws CompositeException {
+        logger.info("Retrieve itinerary with id: "+ id);
         return itineraryComposites.stream()
                 .flatMap(itineraryComposite -> itineraryComposite.getItineraries().stream())
                 .filter(itinerary -> itinerary.getId() == id)
@@ -38,6 +40,7 @@ public class CompositeServiceImpl implements ICompositeService {
     @Override
     public boolean createItinerary(ItineraryComposite itineraryComposite, User user) throws CompositeException {
         itineraryComposite.setUser(user);
+//        logger.info("Itinerary created!");
         return itineraryComposites.add(itineraryComposite);
     }
 
