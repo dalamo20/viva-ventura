@@ -86,18 +86,21 @@ public class Composite implements Serializable {
     }
 
     public void updateLocation(Location location) {
-        if(locations.containsKey(location.getId())){
+        if (locations.containsKey(location.getId())) {
             locations.replace(location.getId(), location);
+            logger.info("Updated location with ID: " + location.getId() + ": " + location);
+        } else {
+            throw new IllegalArgumentException("Location with ID: " + location.getId() + " does not exist.");
         }
-        throw new IllegalArgumentException("Location with ID: " + location.getId() + " does not exist.");
     }
 
     public void deleteLocation(int id) {
         Location removeLocation = locations.remove(id);
         if(removeLocation != null){
             logger.info("Deleted location with ID: " + id + " is deleted.");
+        } else {
+            throw new IllegalArgumentException("Location with ID: " + id + " does not exist.");
         }
-        throw new IllegalArgumentException("Location with ID: " + id + " does not exist.");
     }
 
     public List<Itinerary> getAllItineraries() {

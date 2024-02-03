@@ -25,23 +25,24 @@ public class CompositeTest {
         Itinerary itinerary = new Itinerary(1, "First Itinerary Test");
         composite.addItinerary(itinerary);
 //        logger.log(Level.INFO, "Added Itinerary: " + itinerary);
+
         //get
         Itinerary retrievedItinerary = composite.getItinerary(1);
         assertNotNull(retrievedItinerary);
         assertEquals(itinerary.getName(), retrievedItinerary.getName());
-//        logger.log(Level.INFO, "Get Itinerary: " + retrievedItinerary);
+//        logger.log(Level.INFO, "Retrieved Itinerary: " + retrievedItinerary);
 
         //update
         retrievedItinerary.setName("THIS Itinerary HAS BEEN UPDATED");
         composite.updateItinerary(retrievedItinerary);
         Itinerary updatedItinerary = composite.getItinerary(1);
         assertEquals("THIS Itinerary HAS BEEN UPDATED", updatedItinerary.getName());
-//        logger.log(Level.INFO, "Updated Itinerary: " + retrievedItinerary);
+//        logger.log(Level.INFO, "Updated Itinerary: " + updatedItinerary);
 
         //delete
         composite.deleteItinerary(1);
         assertNull(composite.getItinerary(1));
-//        logger.log(Level.INFO, "Deleted Itinerary with ID: 1");
+//        logger.log(Level.INFO, "Deleted Itinerary with ID: " + itinerary.getId());
     }
 
     @Test
@@ -69,7 +70,7 @@ public class CompositeTest {
         //delete
         composite.deleteActivity(1);
         assertNull(composite.getActivity(1));
-//        logger.log(Level.INFO, "Deleted Activity with ID: 1");
+//        logger.log(Level.INFO, "Deleted Activity with ID: "+ activity.getId());
     }
 
     @Test
@@ -77,7 +78,7 @@ public class CompositeTest {
         //add
         Location location = new Location(1, "Grand Canyon", "Grand RD", 0.0, 0.0, 5.0f);
         composite.addLocation(location);
-//        logger.log(Level.INFO, "Added Location: " + location);
+//        logger.log(Level.INFO, "Added location: " + location);
 
         //get
         Location retrievedLocation = composite.getLocation(1);
@@ -95,7 +96,7 @@ public class CompositeTest {
         //delete
         composite.deleteLocation(1);
         assertNull(composite.getLocation(1));
-//        logger.log(Level.INFO, "Location DELETED with ID 1");
+//        logger.log(Level.INFO, "Location DELETED with ID: " + location.getId());
     }
 
     @Test
