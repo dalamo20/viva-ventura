@@ -195,4 +195,14 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 - This new composite class will use the Map data structure as opposed to the last ItineraryComposite class that is using List. 
 - My rationale for making this change is that in both the best-case and worst-case scenarios, as this project continues to grow, Maps would likely outperform Lists at the expense of memory. 
 
+## MSSE 672 WEEK 3
+### JDBC
+<img width="1680" alt="mySqlConnection" src="https://github.com/dalamo20/viva-ventura/assets/35320043/196d5256-516f-469d-b1b3-608999a4938b">
+
+- Here I am attempting to implement c3p0 into my database Connect class. 
+
+<img width="1130" alt="mysqlEntry" src="https://github.com/dalamo20/viva-ventura/assets/35320043/8f2c055d-73c9-4568-aeb1-4429040a4a69">
+
+- By establishing a connection with the database, I was able to add an entry into the itinerary table from the command line. 
+
 ---

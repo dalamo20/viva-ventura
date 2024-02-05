@@ -18,7 +18,6 @@ public class CreateTable {
                 + " id INTEGER PRIMARY KEY,\n"
                 + " itinerary_name TEXT NOT NULL,\n"
                 + " itinerary_composite_id INTEGER,\n"
-                + " FOREIGN KEY (itinerary_composite_id) REFERENCES itinerary_composite(id)\n"
                 + ");";
 
         //Activity table

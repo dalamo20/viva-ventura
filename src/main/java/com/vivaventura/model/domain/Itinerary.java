@@ -4,23 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class Itinerary implements Serializable {
-    //Instance variables
     private static final long serialVersionUID = 1L;
     private int id;
     private String name;
     private List<Activity> activities;
 
-    //Default constructor
     public Itinerary(){}
 
-    //Overloaded constructor
     public Itinerary(String name, List<Activity> activities) {
         this.name = name;
         this.activities = activities;
-//        generateId();
     }
 
     public Itinerary(int id, String name) {
@@ -55,15 +50,6 @@ public class Itinerary implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-    //Might delete. Testing new Composite class
-//    public int generateId() {
-//        if (id == 0) {
-//            Random rand = new Random();
-//            id = Math.abs(rand.nextInt());
-//        }
-//        return id;
-//    }
 
     @Override
     public String toString() {
