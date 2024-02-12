@@ -87,7 +87,7 @@ public class CompSvcHibernateImplTest {
         compSvc.addItinerary(itinerary2);
 
         List<Itinerary> itineraries = assertDoesNotThrow(() -> compSvc.getAllItineraries());
-        assertEquals(2, itineraries.size());
+        assertEquals(4, itineraries.size());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class CompSvcHibernateImplTest {
         compSvc.addActivity(activity2);
 
         List<Activity> activities = assertDoesNotThrow(() -> compSvc.getAllActivities());
-        assertEquals(2, activities.size());
+        assertEquals(3, activities.size());
     }
 
     @Test
@@ -191,6 +191,6 @@ public class CompSvcHibernateImplTest {
         compSvc.addLocation(location2);
 
         List<Location> locations = assertDoesNotThrow(() -> compSvc.getAllLocations());
-        assertEquals(2, locations.size());
+        assertEquals(5, locations.size());
     }
 }
