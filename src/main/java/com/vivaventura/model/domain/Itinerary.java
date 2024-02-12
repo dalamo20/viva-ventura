@@ -1,14 +1,22 @@
 package com.vivaventura.model.domain;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "itinerary")
 public class Itinerary implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL)
     private List<Activity> activities;
 
     public Itinerary(){}

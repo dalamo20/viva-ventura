@@ -1,23 +1,29 @@
 package com.vivaventura.model.domain;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
+import jakarta.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
 import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
 
+@Entity
+@Table(name = "activity")
 public class Activity implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "date")
     private String date;
+    @Column(name = "time")
     private String time;
+    @OneToOne(mappedBy = "activity", cascade = CascadeType.ALL)
     private Location location;
+    @ManyToOne
+    @JoinColumn(name = "itinerary_id")
+    private Itinerary itinerary;
 
     //Default constructor
     public Activity(){}

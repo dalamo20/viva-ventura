@@ -1,18 +1,31 @@
 package com.vivaventura.model.domain;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
+@Entity
+@Table(name = "location")
 public class Location implements Serializable {
     //Instance variables
     private static final long serialVersionUID = 1L;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "address")
     private String address;
+    @Column(name = "latitude")
     private double latitude;
+    @Column(name = "longitude")
     private double longitude;
+    @Column(name = "rating")
     private float rating;
+    @OneToOne
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
 
     //Default constructor
     public Location(){}
