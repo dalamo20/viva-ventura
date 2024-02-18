@@ -3,7 +3,7 @@ package com.vivaventura.model.services.factory;
 import com.vivaventura.model.domain.User;
 import com.vivaventura.model.services.compositeservice.ICompositeService;
 import com.vivaventura.model.services.compositeservice.CompositeServiceImpl;
-import com.vivaventura.model.services.compservice.CompSvcJDBCImpl;
+import com.vivaventura.model.services.compservice.CompSvcHibernateImpl;
 import com.vivaventura.model.services.compservice.ICompSvc;
 import com.vivaventura.model.services.itineraryservice.IItineraryService;
 import com.vivaventura.model.services.itineraryservice.ItineraryServiceImpl;
@@ -28,6 +28,7 @@ public class SimpleServiceFactory {
         return new CompositeServiceImpl();
     }
     public ICompSvc getCompSvc() {
-        return new CompSvcJDBCImpl();
+        return new CompSvcHibernateImpl();
     }
+
 }

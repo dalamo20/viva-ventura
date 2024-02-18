@@ -69,7 +69,7 @@ public abstract class ManagerSuperType {
          * Property file is located by making a call to
          * System.getProperty(prop_location), which actually
          * reads off from the target runTestDriver in build.xml
-         *   <sysproperty key="prop_location" value="${prop.dir}application.properties"/>
+         *   <sysproperty key="prop_location" value="${prop.dir}services.xml"/>
          *
          * If running in Eclipse
          * =====================
@@ -78,9 +78,9 @@ public abstract class ManagerSuperType {
          *       1. Run As -> Run Configuration
          *       2. Select Arguments Tab
          *       3. In VM Arguments section, add the -D property
-         * 	           -Dprop_location=<drive><location>\application.properties
+         * 	           -Dprop_location=<drive><location>\services.xml
          *            Example:
-         * 	           -Dprop_location=E:\FleetRental\config\application.properties
+         * 	           -Dprop_location=E:\FleetRental\config\services.xml
          *
          * If running on command line
          * ==========================

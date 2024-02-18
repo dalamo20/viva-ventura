@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+        <property key="ILoginService">com.vivaventura.model.services.loginservice.LoginServiceImpl</property>
+        <property key="IItineraryService">com.vivaventura.model.services.itineraryservice.ItineraryServiceImpl</property>
+        <property key="IUserService">com.vivaventura.model.services.userservice.UserServiceImpl</property>
+        <property key="ICompositeService">com.vivaventura.model.services.compositeservice.CompositeServiceImpl</property>
+        <property key="ICompSvc">com.vivaventura.model.services.compservice.CompSvcHibernateImpl</property>
+        <property key="jdbc.url">jdbc:mysql://localhost:3306/vivadb</property>
+        <property key="jdbc.user">root</property>
+        <property key="jdbc.password">root</property>
+        <property key="jdbc.min.pool.size">5</property>
+        <property key="jdbc.max.pool.size">10</property>
+</properties>

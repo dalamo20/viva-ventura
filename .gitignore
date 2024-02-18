@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignore application.properties
+# Ignore services.xml
 application.properties
+services.xml
 

@@ -30,7 +30,6 @@ class ServiceFactoryTest {
         ServiceFactory factory1 = ServiceFactory.getInstance();
         ServiceFactory factory2 = ServiceFactory.getInstance();
 
-        //check that both instances are the same
         assertNotNull(factory1);
         assertNotNull(factory2);
         assertSame(factory1, factory2);

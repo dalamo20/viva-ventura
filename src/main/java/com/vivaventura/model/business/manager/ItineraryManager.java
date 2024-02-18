@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 /**
  *  FULL ARGUMENT (PUT THIS IN THE BOX AFTER CHANGING PATH)
  * WARNING:  follow this format exactly, no spaces anywhere.
- * -Dprop_location:prop_location=C:\Users\rgran\Dropbox\ECLIPSE-WORKSPACE\MSSE670-AIRLINE-RESERVATION\AirlineReservation\config\application.properties
+ * -Dprop_location:prop_location=C:\Users\rgran\Dropbox\ECLIPSE-WORKSPACE\MSSE670-AIRLINE-RESERVATION\AirlineReservation\config\services.xml
  *
  * @author Randall Granier
  *

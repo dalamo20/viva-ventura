@@ -205,4 +205,32 @@ Viva Ventura is more than just an itinerary app, it's your ultimate travel compa
 
 - By establishing a connection with the database, I was able to add an entry into the itinerary table from the command line. 
 
+## MSSE 672 WEEK 4
+### ORM
+<img width="602" alt="annotDomain" src="https://github.com/dalamo20/viva-ventura/assets/35320043/196eff28-dbb1-408c-8c5e-ba33b77f8d36">
+
+- Annotated classes that will be implemented to the database. 
+
+<img width="723" alt="hibernateConfig" src="https://github.com/dalamo20/viva-ventura/assets/35320043/78b2ca17-3995-4696-843f-61dc22160997">
+
+- Took the annotation route and create the hibernate.cfg.xml with all the configurations to for hibernate.
+
+<img width="793" alt="SvcHibernateImpl" src="https://github.com/dalamo20/viva-ventura/assets/35320043/25d47d11-2f52-4393-a0d0-dd74168dc3dc">
+
+- Created an entirely new service implementation that utilizes Hibernate. 
+
+
+## MSSE 672 WEEK 5
+### XML
+<img width="978" alt="Screenshot 2024-02-18 at 4 59 26 PM" src="https://github.com/dalamo20/viva-ventura/assets/35320043/17164eb6-29ff-4e5c-bd23-34f065f58a5d">
+
+- I have converted my application.properties file to XML and named it services.xml. 
+- I started with the XML Declaration at the top with the UTF-8 attribute. <properties> is my rootElement that holds the body of my XML. 
+- Within the body I have an element property tags that constructs the data from my services and jdbc using keys to value. 
+
+<img width="1669" alt="propManager" src="https://github.com/dalamo20/viva-ventura/assets/35320043/cb376712-a705-453a-bb9b-cd2ee5ce5e42">
+
+- The PropertyManager is responsible for loading the property file into memory and make it available for all other classes to use.
+- SAX parser and DefaultHandler are used in the same file to process the XML file sequentially using overridden callback events such as startElement & characters.
+
 ---
